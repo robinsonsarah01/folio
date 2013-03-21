@@ -1,4 +1,4 @@
-squidward
+Portfoliosify
 =========
 
-Sarah is a squidward
+Daryl (the squidward), Sarah, Elizabeth, Peter
