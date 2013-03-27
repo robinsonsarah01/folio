@@ -87,7 +87,21 @@ def addPage(username,pagename,pageinfo):
 
 @user_exists
 def delPage(username,pagename):
-    pass
+    user = coll.find_one({"username":username})
+    if pagename not in user["pages"]:
+        return errors[2]
+
+    p = [ x for x in user["pages"] if x != pagename ]
+    coll.update({"username":username},
+                { "$set": {"pages":p} } )
+    
+    coll.update({"username":username},
+                { "$unset" : { pagename : "" } } )
+    
+    return True
+    
+
+
 
 
 #will implement later if needed
@@ -112,4 +126,5 @@ if __name__ == "__main__":
     connect()
     #addUser("test","test")
     #print checkPass("test","test")
+    #print delPage("test","p1")
     print getUserInfo("test")
