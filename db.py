@@ -18,7 +18,7 @@ def connect():
 
 def user_exists(original):
     def check(*args):
-        username,password = args[0],args[1]
+        username = args[0]
         if username not in [ x["username"] for x in coll.find() ]:
             return errors[1]
         else:
@@ -48,8 +48,15 @@ def checkPass(username,password):
     return False
 
 
+@user_exists
 def getUserInfo(username):
-    pass
+    user = coll.find_one({"username":username})
+    info = { "username" : user["username"]
+             , "pages" : user["pages"] }
+    for p in user["pages"]:
+        info[p] = user[p]
+    
+    return info
 
 
 def getPage(username,page):
@@ -67,9 +74,19 @@ def editPage(username,pagename,aspect,info):
 
 
 
+#testing stuff
+
+def dropUsers(): #testing purposes
+    for iden in [ x["_id"] for x in coll.find() ]:
+        coll.remove({"_id":iden})
+    return True
+
+
+
 
 
 if __name__ == "__main__":
     connect()
     #addUser("test","test")
-    print checkPass("test","test")
+    #print checkPass("test","test")
+    print getUserInfo("test")
