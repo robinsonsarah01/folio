@@ -51,6 +51,8 @@ Deadlines
 4/28: Folio is polished and has been tested by many; final issues are being worked out.  
 5/1: Project due date  
 
+(EDIT: please note that daryl did not consult us about any of this and therefore these deadlines are not realistic)
+
 Individual Task Distribution
 ----------------------------
 More tasks will be added as progress carries on.  
