@@ -54,7 +54,7 @@ Deadlines
 
 Individual Task Distribution
 ----------------------------
-Thesewill change as the project progresses. 
+These will change as the project progresses. Feel free to modify anything.  
 *   Peter and Elizabeth are to finalize the UI design, paper prototyping everything and beginning to work on the html pages. Once a solid UI design is in place, there will be many more tasks here.  
 *   Sarah will write the server code for the login page, preferably implementing session and remember me ([relevant documentation](http://pythonhosted.org/Flask-Login/)) -- Sarah does not see why we need to use flask-login, as none of the special things it does are things we need. She will instead be working on fleshing out some of the db.py functions. 
 *   Daryl will plan out visual effect templates for use towards the end of the project, delegate and coordinate work, and perform general bugfixes/pitch in wherever he sees fit.
