@@ -56,7 +56,8 @@ Individual Task Distribution
 More tasks will be added as progress carries on.  
 *   Peter and Elizabeth are to finalize the UI design, paper prototyping everything and beginning to work on the html pages. Once a solid UI design is in place, there will be many more tasks here.  
 *   Sarah will write the server code for the login page, preferably implementing session and remember me ([relevant documentation](http://pythonhosted.org/Flask-Login/)) 
-*   Daryl will plan out visual effect templates for use towards the end of the project, delegate and coordinate work, and perform general bugfixes/pitch in wherever he sees fit. I'm kind of appointing myself team leader here. 
+*   Daryl will plan out visual effect templates for use towards the end of the project, delegate and coordinate work, and perform general bugfixes/pitch in wherever he sees fit.
+*   Team leader is unfilled. It is not Daryl unless a vote is performed.
 
 Branch Workflow/Github Use
 --------------------------
