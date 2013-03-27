@@ -12,6 +12,8 @@ Resources & Dependencies:
 *   Github API for code integration  
 *   Soundcloud for music integration
 *   Deviantart/flickr for art integration
+*   Youtube for video integration
+*   Ravelry for yarn/pattern integration
 
 Current Features
 ----------------
