@@ -20,7 +20,7 @@ Current Features
 Features To Be Implemented
 --------------------------
 
-###Frontend  
+###Frontend  (Peter & Elizabeth)
 *   Choose a custom URL for your folio (if we want to do this)  
 *   View folio  
 *   Ready-made templates
@@ -32,7 +32,7 @@ Features To Be Implemented
 *   Forgotten password page  
 *   Many more
 
-###Backend  
+###Backend  (Sarah and Daryl)
 *   Server login stuff + session + remember me; see [relevant documentation](http://pythonhosted.org/Flask-Login/) -- see below under tasks re: why are we using flask-login
 *   Forgotten password server stuff (may or may not be feasible -- probably not, leave it for later if there's time)
 *   MongoDB: Storing users' folios
@@ -50,15 +50,17 @@ Deadlines
 *    4/28: Folio is polished and has been "tested by many"; final issues are being worked out.  
 *    5/1: Project due date  
 
-(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Sarah's and Elizabeth's schedules may be impacted by pending college visits. We are working on making them (and everything else here) more realistic. Thank you.)
+(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Schedules may become impacted by pending college visits. We are working on making them (and everything else here) more realistic. Thank you.)
 
 Individual Task Distribution
 ----------------------------
-Thesewill change as the project progresses. 
+These will change as the project progresses. Feel free to modify anything. 
+*   Peter will lead frontend work.
+*   Sarah will lead backend work.
 *   Peter and Elizabeth are to finalize the UI design, paper prototyping everything and beginning to work on the html pages. Once a solid UI design is in place, there will be many more tasks here.  
 *   Sarah will write the server code for the login page, preferably implementing session and remember me ([relevant documentation](http://pythonhosted.org/Flask-Login/)) -- Sarah does not see why we need to use flask-login, as none of the special things it does are things we need. She will instead be working on fleshing out some of the db.py functions. 
 *   Daryl will plan out visual effect templates for use towards the end of the project, delegate and coordinate work, and perform general bugfixes/pitch in wherever he sees fit.
-*   Team leader is unfilled. It is not Daryl unless a vote is performed.
+*   Team leader is unfilled. It is not Daryl unless a vote is performed. Awaiting Peter's return to teh internetz to determine overall team leader.
 
 Branch Workflow/Github Use
 --------------------------
