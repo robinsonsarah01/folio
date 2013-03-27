@@ -5,7 +5,7 @@ Daryl Sew, Sarah Robinson, Elizabeth Ji, Peter Jasko
 
 What it is:  
 -----------
-Folio is a streamlined portfolio builder created with the goal of helping job seekers present themselves effectively to prospective employers.  
+Folio is a streamlined portfolio builder created to help job seekers present themselves effectively to prospective employers.  
 
 Resources & Dependencies:
 ------------------------
@@ -15,7 +15,7 @@ Resources & Dependencies:
 
 Current Features
 ----------------
-*   Front page design, courtesy of Jasko   
+*   [Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png), courtesy of Jasko   
 
 Features To Be Implemented
 --------------------------
@@ -45,11 +45,11 @@ Deadlines
 4/1: 2 ready-made templates created. MongoDB code for storing folios functional.  
 4/3: Users should be able to view and edit folio at a basic level.  
 4/7: More ready-made templates created. Mechanisms for customizable templates in place; editing folios allows for addition of projects and uploading of resumes.  
-4/14: Integration with other sites worked out. Customization smoothed out.
-4/21: Visual effects added to site and folios; more ready-made templates created, some with fancy visuals
-4/24: Project deployed and sent out to others for beta testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth deal with debugging.
-4/28: Folio is polished and has been tested by many; final issues are being worked out.
-5/1: Project due date
+4/14: Integration with other sites worked out. Customization smoothed out.  
+4/21: Visual effects added to site and folios; more ready-made templates created, some with fancy visuals.  
+4/24: Project deployed and sent out to others for beta testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth deal with debugging.  
+4/28: Folio is polished and has been tested by many; final issues are being worked out.  
+5/1: Project due date  
 
 Individual Task Distribution
 ----------------------------
