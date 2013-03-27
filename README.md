@@ -33,9 +33,8 @@ Features To Be Implemented
 *   Many more
 
 ###Backend  
-*   Server login stuff + session + remember me; see [relevant documentation](http://pythonhosted.org/Flask-Login/)
-*   Forgotten password server stuff (may or may not be feasible)
-*   Dealing with folio custom URLs
+*   Server login stuff + session + remember me; see [relevant documentation](http://pythonhosted.org/Flask-Login/) -- see below under tasks re: why are we using flask-login
+*   Forgotten password server stuff (may or may not be feasible -- probably not, leave it for later if there's time)
 *   MongoDB: Storing users' folios
 
 Deadlines
@@ -55,9 +54,9 @@ Deadlines
 
 Individual Task Distribution
 ----------------------------
-More tasks will be added as progress carries on.  
+Thesewill change as the project progresses. 
 *   Peter and Elizabeth are to finalize the UI design, paper prototyping everything and beginning to work on the html pages. Once a solid UI design is in place, there will be many more tasks here.  
-*   Sarah will write the server code for the login page, preferably implementing session and remember me ([relevant documentation](http://pythonhosted.org/Flask-Login/)) 
+*   Sarah will write the server code for the login page, preferably implementing session and remember me ([relevant documentation](http://pythonhosted.org/Flask-Login/)) -- Sarah does not see why we need to use flask-login, as none of the special things it does are things we need. She will instead be working on fleshing out some of the db.py functions. 
 *   Daryl will plan out visual effect templates for use towards the end of the project, delegate and coordinate work, and perform general bugfixes/pitch in wherever he sees fit.
 *   Team leader is unfilled. It is not Daryl unless a vote is performed.
 
