@@ -24,7 +24,6 @@ Features To Be Implemented
 *   Choose a custom URL for your folio (if we want to do this)  
 *   View folio  
 *   Ready-made templates
-*   Method of customizing templates
 *   Edit folio  
 *   Add project  
 *   Upload resume  
@@ -41,17 +40,17 @@ Features To Be Implemented
 
 Deadlines
 ---------
-3/29: Login page should be functional for multiple users concurrently accessing folio.  
-4/1: 2 ready-made templates created. MongoDB code for storing folios functional.  
+3/29: MongoDB code for storing folios functional.  
+4/1: 2 ready-made templates created. Login page should be functional for multiple users concurrently accessing folio. 
 4/3: Users should be able to view and edit folio at a basic level.  
-4/7: More ready-made templates created. Mechanisms for customizable templates in place; editing folios allows for addition of projects and uploading of resumes.  
-4/14: Integration with other sites worked out. Customization smoothed out.  
+4/7: More ready-made templates created. Editing folios allows for addition of projects and uploading of resumes.  
+4/14: Integration with other sites worked out.
 4/21: Visual effects added to site and folios; more ready-made templates created, some with fancy visuals.  
 4/24: Project deployed and sent out to others for beta testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth deal with debugging.  
 4/28: Folio is polished and has been tested by many; final issues are being worked out.  
 5/1: Project due date  
 
-(EDIT: please note that daryl did not consult us about any of this and therefore these deadlines are not realistic)
+(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. We are working on making them (and everything else here) more realistic. Thank you.)
 
 Individual Task Distribution
 ----------------------------
