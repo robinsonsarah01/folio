@@ -20,7 +20,7 @@ Current Features
 Features To Be Implemented
 --------------------------
 
-###Frontend  
+###Frontend  (Peter & Elizabeth)
 *   Choose a custom URL for your folio (if we want to do this)  
 *   View folio  
 *   Ready-made templates
@@ -32,7 +32,7 @@ Features To Be Implemented
 *   Forgotten password page  
 *   Many more
 
-###Backend  
+###Backend  (Sarah and Daryl)
 *   Server login stuff + session + remember me; see [relevant documentation](http://pythonhosted.org/Flask-Login/) -- see below under tasks re: why are we using flask-login
 *   Forgotten password server stuff (may or may not be feasible -- probably not, leave it for later if there's time)
 *   MongoDB: Storing users' folios
