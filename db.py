@@ -3,7 +3,8 @@ from pymongo import Connection
 conn = Connection("mongo2.stuycs.org")
 global db,coll
 errors = ["user already exists"
-          ,"user does not exist"]
+          ,"user does not exist"
+          ,"page does not exist"]
 
 
 def connect():
@@ -40,6 +41,7 @@ def addUser(username,password):
     coll.insert(user)
     return True
 
+
 @user_exists
 def checkPass(username,password):
     user = coll.find_one({"username":username})
@@ -53,14 +55,18 @@ def getUserInfo(username):
     user = coll.find_one({"username":username})
     info = { "username" : user["username"]
              , "pages" : user["pages"] }
+
     for p in user["pages"]:
         info[p] = user[p]
     
     return info
 
-
+@user_exists
 def getPage(username,page):
-    pass
+    user = coll.find_one({"username":username})
+    if page in user["pages"]:
+        return user[page]
+    return errors[2]
 
 
 def addPage(username,pagename,pageinfo):
