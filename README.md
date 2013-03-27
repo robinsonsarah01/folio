@@ -15,7 +15,7 @@ Resources & Dependencies:
 
 Current Features
 ----------------
-*   [Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png), courtesy of Jasko   
+*   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png), courtesy of Jasko   
 
 Features To Be Implemented
 --------------------------
