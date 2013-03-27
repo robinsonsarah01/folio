@@ -32,7 +32,7 @@ Features To Be Implemented
 *   Forgotten password page  
 *   Many more
 
-###Backend  (Sarah and Daryl)
+###Backend  (Sarah & Daryl)
 *   Server login stuff + session + remember me; see [relevant documentation](http://pythonhosted.org/Flask-Login/) -- see below under tasks re: why are we using flask-login
 *   Forgotten password server stuff (may or may not be feasible -- probably not, leave it for later if there's time)
 *   MongoDB: Storing users' folios
@@ -40,17 +40,17 @@ Features To Be Implemented
 Deadlines
 ---------
 
-*    3/29: MongoDB code for storing folios functional.  
-*    4/1: 2 ready-made templates created. Login page should be functional for multiple users concurrently accessing folio. 
-*    4/3: Users should be able to view and edit folio at a basic level.  
-*    4/7: More ready-made templates created. Editing folios allows for addition of projects and uploading of resumes.  
-*    4/14: Integration with other sites worked out.
-*    4/21: Visual effects added to site and folios; more ready-made templates created, some with fancy visuals.  
-*    4/24: Project deployed and sent out to others for beta testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth deal with debugging.
-*    4/28: Folio is polished and has been "tested by many"; final issues are being worked out.  
+*    4/1: MongoDB code for storing folios functional.  
+*    4/3: 2 ready-made templates created. Login page should be functional for multiple users concurrently accessing folio. 
+*    4/7: Users should be able to view and edit folio at a basic level.  
+*    4/14: More ready-made templates created. Editing folios allows for addition of projects and uploading of resumes.  
+*    4/21: Integration with other sites worked out.
+*    4/24: Visual designs added to site and folios; more ready-made templates created.  
+*    4/28: Project deployed; testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth deal with debugging.
+*    4/30: Folio is polished; final issues are being worked out.  
 *    5/1: Project due date  
 
-(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Schedules may become impacted by pending college visits. We are working on making them (and everything else here) more realistic. Thank you.)
+(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Schedules may become impacted by pending college visits. Thank you.)
 
 Individual Task Distribution
 ----------------------------
