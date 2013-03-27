@@ -50,7 +50,7 @@ Deadlines
 *    4/28: Folio is polished and has been "tested by many"; final issues are being worked out.  
 *    5/1: Project due date  
 
-(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Sarah's and Elizabeth's schedules may be impacted by pending college visits. We are working on making them (and everything else here) more realistic. Thank you.)
+(EDIT: Please note that Daryl did not consult us about any of this and therefore these deadlines are not realistic. Schedules may become impacted by pending college visits. We are working on making them (and everything else here) more realistic. Thank you.)
 
 Individual Task Distribution
 ----------------------------
