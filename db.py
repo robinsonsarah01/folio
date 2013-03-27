@@ -4,7 +4,8 @@ conn = Connection("mongo2.stuycs.org")
 global db,coll
 errors = ["user already exists"
           ,"user does not exist"
-          ,"page does not exist"]
+          ,"page does not exist"
+          ,"page already exists"]
 
 
 def connect():
@@ -69,11 +70,27 @@ def getPage(username,page):
     return errors[2]
 
 
+@user_exists
 def addPage(username,pagename,pageinfo):
+    user = coll.find_one({"username":username})
+    if pagename in user["pages"]:
+        return errors[3]
+    
+    p = user["pages"]
+    p.append(pagename)
+    coll.update({"username":username},
+                { "$set": {"pages":p
+                           ,pagename:pageinfo} } )
+    
+    return True
+
+
+@user_exists
+def delPage(username,pagename):
     pass
 
 
-#might not need this
+#will implement later if needed
 def editPage(username,pagename,aspect,info):
     pass
 
