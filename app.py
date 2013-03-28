@@ -16,4 +16,11 @@ def home():
          return render_template("login.html")
 
 
-app.run(debug=True)
+
+# decorator reminder:
+# https://github.com/stuycs-ml7/classcode/blob/master/decorators/login2.py
+
+if __name__ == "__main__":
+    
+    app.run(debug=True)
+
