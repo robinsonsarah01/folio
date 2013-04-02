@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,redirect
+from flask import Flask,request,render_template,redirect, session, url_for
 import db
 
 app = Flask(__name__)
@@ -9,10 +9,15 @@ def login():
     if request.method=='GET':
         return render_template("login.html")
     else:
-         button = request.form['password']
-         print(button)
-         return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN"
-
+        try:
+            button = request.form['password']
+            print(button)
+            return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN"
+        except:
+            name = str(request.form['first_name']) + str(request.form['last_name'])
+            email = str(request.form['new_email'])
+            password = str(request.form['new_password'])
+            return "PLACEHOLDER - YOU HAVE BEEN REGISTERED"
 
 @app.route("/<username>",methods = ["GET","POST"])
 def home(username=""):
