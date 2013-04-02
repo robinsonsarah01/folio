@@ -13,17 +13,20 @@ def login():
         if button == "Login":
             password = request.form["password"]
             email = request.form["login"]
+            
             #check pass should be done with js and ajax
+
             #PLACEHOLDER - ADD USER TO SESSION / LOG THEM IN
+            
             return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN"
         
-        """
-            name = str(request.form['first_name']) + str(request.form['last_name'])
-            email = str(request.form['new_email'])
-            password = str(request.form['new_password'])
-            return "PLACEHOLDER - YOU HAVE BEEN REGISTERED"
-        """
-        return "doot doot"
+        else: #if button == "Create my Folio!"
+            name = request.form['first_name'] + " " + request.form['last_name']
+            email = request.form['new_email']
+            password = request.form['new_password']
+            res = db.addUser(email,password)
+            return "<p>PLACEHOLDER - YOU HAVE BEEN REGISTERED</p>" + "<p>" + str(res) + "</p>"
+
 
 @app.route("/<username>",methods = ["GET","POST"])
 def home(username=""):
