@@ -15,7 +15,7 @@ def login():
     else: 
         button = request.form["button"]
         if button == "Login":
-            password = request.form["password"]
+            #password = request.form["password"]
             username = request.form["login"]
             
             #check pass should be done with js and ajax
@@ -56,6 +56,20 @@ def folio(username="",page=""):
         return redirect(url_for("home",username))
     else:
         return "PLACEHOLDER - FOLIO PAGE FOR " + username + "'s " + page
+
+
+
+#ajax urls
+
+@app.route("/checkPass",methods = ["GET","POST"])
+def checkPass():
+    username = request.args.get("username","")
+    password = request.args.get("password","")
+    res = {}
+    if username and password:
+        res = db.checkPass(username,password)
+    return json.dumps(res)
+
 
 
 if __name__ == "__main__":
