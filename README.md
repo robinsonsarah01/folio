@@ -1,7 +1,8 @@
 Folio
 =========
-###Group Members:  
-Daryl Sew, Sarah Robinson, Elizabeth Ji, Peter Jasko  
+###Group Members
+
+Sarah Robinson, Elizabeth Ji, Peter Jasko, Daryl Sew
 
 What it is:  
 -----------
