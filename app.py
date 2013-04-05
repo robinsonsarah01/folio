@@ -13,6 +13,9 @@ def login():
             return redirect(url_for("home",username=username))
         return render_template("login.html")
     else: 
+        if "user" in session:
+                return "we have issues."
+
         button = request.form["button"]
         if button == "Login":
             #password = request.form["password"]
@@ -20,8 +23,6 @@ def login():
             
             #check pass should be done with js and ajax
 
-            if "user" in session:
-                return "we have issues."
             session["user"] = username
             
             return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN, " + str(username) 
