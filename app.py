@@ -14,15 +14,22 @@ def login():
         return render_template("login.html")
     else: 
         if "user" in session:
-                return "we have issues."
+                return "we have issues." #aka this is not a thing
 
         button = request.form["button"]
         if button == "Login":
-            #password = request.form["password"]
+            password = request.form["password"]
             username = request.form["login"]
             
-            #check pass should be done with js and ajax
-
+            #check pass
+            res = db.checkPass(username,password)
+            if res != True: #res is false or user does not exist
+                error = res
+                if res == False: 
+                    error = "Incorrect Password"
+                return render_template("login.html",error=error)
+            
+            #if all goes well
             session["user"] = username
             
             return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN, " + str(username) 
@@ -62,6 +69,7 @@ def folio(username="",page=""):
 
 #ajax urls
 
+""" #not to be used - see login url for authentication
 @app.route("/checkPass",methods = ["GET","POST"])
 def checkPass():
     username = request.args.get("username","")
@@ -70,7 +78,7 @@ def checkPass():
     if username and password:
         res = db.checkPass(username,password)
     return json.dumps(res)
-
+"""
 
 
 if __name__ == "__main__":
