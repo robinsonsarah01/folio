@@ -45,7 +45,7 @@ Deadlines
 
 *    4/1: MongoDB code for storing folios functional.  COMPLETE
 *    4/5: Login page should be functional for multiple users concurrently accessing folio. MOSTLY COMPLETE (authentication not done)
-*    4/7: Users should be able to view and edit folio at a basic level.  
+*    4/7: Users should be able to view and edit folio at a basic level. UNFINISHED (we are probably not making this deadline due to specifics needing to be worked out.)
 *    4/12: A few ready-made templates created (pushed back from 4/5). Editing folios allows for addition of projects and uploading of resumes.  
 *    4/21: Integration with other sites worked out.
 *    4/24: Visual designs added to site and folios; more ready-made templates created.  
