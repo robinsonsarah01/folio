@@ -1,7 +1,8 @@
 Folio
 =========
-###Group Members:  
-Daryl Sew, Sarah Robinson, Elizabeth Ji, Peter Jasko  
+###Group Members
+
+Sarah Robinson, Elizabeth Ji, Peter Jasko, Daryl Sew
 
 What it is:  
 -----------
@@ -17,8 +18,9 @@ Resources & Dependencies:
 
 Current Features
 ----------------
-*   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png), courtesy of Peter
+*   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png) (courtesy of Peter)
 *   Simple database functions  
+*   Login functions mostly functional (checking passwords must be implemented)
 
 Features To Be Implemented
 --------------------------
@@ -41,10 +43,10 @@ Features To Be Implemented
 Deadlines
 ---------
 
-*    4/1: MongoDB code for storing folios functional.  
-*    4/5: 2 ready-made templates created. Login page should be functional for multiple users concurrently accessing folio. 
+*    4/1: MongoDB code for storing folios functional.  COMPLETE
+*    4/5: Login page should be functional for multiple users concurrently accessing folio. MOSTLY COMPLETE (authentication not done)
 *    4/7: Users should be able to view and edit folio at a basic level.  
-*    4/12: More ready-made templates created. Editing folios allows for addition of projects and uploading of resumes.  
+*    4/12: A few ready-made templates created (pushed back from 4/5). Editing folios allows for addition of projects and uploading of resumes.  
 *    4/21: Integration with other sites worked out.
 *    4/24: Visual designs added to site and folios; more ready-made templates created.  
 *    4/28: Project deployed; testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth will deal with debugging.
