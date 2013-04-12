@@ -20,7 +20,7 @@ Current Features
 ----------------
 *   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png) (courtesy of Peter)
 *   Simple database functions  
-*   Login functions mostly functional (checking passwords must be implemented)
+*   Login functions are functional
 
 Features To Be Implemented
 --------------------------
