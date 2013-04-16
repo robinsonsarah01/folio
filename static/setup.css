@@ -1,0 +1,32 @@
+   html{
+    background-image: url('../static/image.png');
+    background-repeat: repeat;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;		 
+    letter-spacing: -1px;		 
+    }
+  
+  #login.back-rectangle{
+  background-color: #8E978D;
+  font-color: #FFFFFF;
+  position: absolute;
+  display: block;
+  height: 4em;
+  width: 100%;
+  left: 0%;
+  top: 0%;
+  z-index:2;
+  }
+
+  
+  #logo,h1{
+  position:absolute;
+  display: block;
+  left: 0%;
+  top: -.9em;
+  font-size:4em;
+  color: white;
+  z-index:99;
+  }
+
+
