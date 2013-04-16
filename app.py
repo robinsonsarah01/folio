@@ -67,6 +67,19 @@ def folio(username="",page=""):
 
 
 
+@app.route("/<username>/<page>/edit",methods = ["GET","POST"])
+def edit(username="",page=""):
+     if not username and "user" not in session:
+        return redirect(url_for("login"))
+    if "user" in session and not username:
+        username = session["user"]
+    if not page:
+        return redirect(url_for("home",username))
+    else:
+        return "PLACEHOLDER - FOLIO EDIT PAGE FOR " + username + "'s " + page
+
+
+
 #ajax urls
 
 """ #not to be used - see login url for authentication
