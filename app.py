@@ -94,6 +94,15 @@ def checkPass():
 """
 
 
+@app.route("/dummyajax",methods=["GET","POST"])
+def dummyajax():
+    username = request.args.get("username","")
+    if not username:
+        username = session["user"]
+    return json.dumps(db.getUserInfo(username))
+
+
+
 if __name__ == "__main__":
     db.connect()
     app.run(debug=True)
