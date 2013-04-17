@@ -1,9 +1,19 @@
 from flask import Flask,request,render_template,redirect, session, url_for
+from werkzeug import secure_filename
 import db
 import json 
+import os
 
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
+
+#Later we can look into implementing http://pythonhosted.org/Flask-Uploads/
+#for neater upload stuff.
+#Sets the maximum upload filesize to 96 megabytes; larger files will raise a RequestEntityTOoLarge exception
+app.config['MAX_CONTENT_LENGTH'] = 96 * 1024 * 1024
+app.config['UPLOAD_FOLDER'] = 'uploads'
+global ALLOWED_EXTENSIONS 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'html'])
 
 @app.route("/", methods = ['GET','POST'])
 def login():
@@ -65,8 +75,23 @@ def folio(username="",page=""):
     else:
         return "PLACEHOLDER - FOLIO PAGE FOR " + username + "'s " + page
 
+@app.route("/upload", methods = ["GET", "POST"])
+def upload():
+    if request.method == "POST":
+        uploaded_files = request.files.getlist("file[]")
+        for fiel in uploaded_files:
+            if fiel and allowed_file(fiel.filename):
+                filename = secure_filename(fiel.filename)
+                fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                return "Uploaded unsuccessfully!"
+        return "Uploaded successfully!"
+    else:
+        return render_template("upload.html")
 
-
+def allowed_file(filename):
+    return '.' in filename and \
+            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 #ajax urls
 
 """ #not to be used - see login url for authentication
