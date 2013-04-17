@@ -69,7 +69,7 @@ def folio(username="",page=""):
 
 @app.route("/<username>/<page>/edit",methods = ["GET","POST"])
 def edit(username="",page=""):
-     if not username and "user" not in session:
+    if not username and "user" not in session:
         return redirect(url_for("login"))
     if "user" in session and not username:
         username = session["user"]
