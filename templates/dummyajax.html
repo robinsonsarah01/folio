@@ -1,0 +1,31 @@
+<!doctype HTML>
+
+<html>
+
+<head>
+</head>
+
+<body>
+
+<p id="userinfo">Some stuff here</p>
+
+</body>
+
+
+<script src="/static/js/jquery.js"></script>
+
+<script>
+
+ $(document).ready( function () {
+     doAjax();
+ }
+
+ function doAjax(){
+     $.getJson("/getUserInfo",function(data){
+         $.("userinfo").empty().append(data);
+     }
+ }
+
+</script>
+
+</html>

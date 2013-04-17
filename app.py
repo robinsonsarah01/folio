@@ -94,7 +94,7 @@ def checkPass():
 """
 
 
-@app.route("/dummyajax",methods=["GET","POST"])
+@app.route("/getUserInfo",methods=["GET","POST"])
 def dummyajax():
     username = request.args.get("username","")
     if not username:
