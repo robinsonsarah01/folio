@@ -3,7 +3,9 @@
     background-repeat: repeat;
     font-family: 'Open Sans', sans-serif;
     line-height: 1.5;		 
-    letter-spacing: -1px;		 
+    letter-spacing: -1px;		
+overflow-y: auto;
+background-color: transparent; 
     }
   
   #login.back-rectangle{
@@ -18,8 +20,22 @@
   z-index:2;
   }
 
-  
-  #logo,h1{
+.left_rectangle{
+position: relative;
+background-color: #8E978D;
+ display: block;
+  height: 3em;
+-moz-border-radius: 5px;
+border-radius: 5px;
+box-shadow: 2px 2px 2px black;
+}  
+
+.left_rectangle h1{
+
+
+color: white;
+}
+  #logo{
   position:absolute;
   display: block;
   left: 0%;
@@ -29,4 +45,26 @@
   z-index:99;
   }
 
+#left_scroll{
+position:absolute;
+left:1%;
+top:5em;
+width:16%;
+height:85%;
+
+
+
+}
+
+#right_scroll{
+position:absolute;
+right:1%;
+top:5em;
+width:80%;
+height:85%;
+overflow-y:scroll;
+box-shadow: 3px 3px 7px #8E978D;
+background-image: url('../static/groovepaper.png');
+background-repeat: repeat;
+}
 
