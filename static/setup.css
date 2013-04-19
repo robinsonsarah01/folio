@@ -24,17 +24,17 @@ background-color: transparent;
 position: relative;
 background-color: #8E978D;
  display: block;
-  height: 3em;
--moz-border-radius: 5px;
-border-radius: 5px;
+ height: 1.5em;
+-moz-border-radius: 2px;
+border-radius: 2px;
 box-shadow: 2px 2px 2px black;
+color: white;
+font-size:2em;
+margin-bottom:.5em;
 }  
 
-.left_rectangle h1{
 
 
-color: white;
-}
   #logo{
   position:absolute;
   display: block;
@@ -45,15 +45,19 @@ color: white;
   z-index:99;
   }
 
+#logout{
+position:absolute;;
+right:1%;
+top:2.5em;
+color:white;
+}
+
 #left_scroll{
 position:absolute;
 left:1%;
 top:5em;
 width:16%;
 height:85%;
-
-
-
 }
 
 #right_scroll{
@@ -68,3 +72,13 @@ background-image: url('../static/groovepaper.png');
 background-repeat: repeat;
 }
 
+#user_image{
+
+display:block;
+position:relative;
+left:40%;
+height: 5em;
+width:20px;
+background-color:#8E978D;
+z-index:1000;
+}
