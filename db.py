@@ -126,5 +126,5 @@ if __name__ == "__main__":
     connect()
     #addUser("test","test")
     #print checkPass("test","test")
-    #print delPage("test","p1")
+    #print addPage("test","page","<p>here is some stuff yep</p>")
     print getUserInfo("test")

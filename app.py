@@ -62,8 +62,14 @@ def folio(username="",page=""):
         username = session["user"]
     if not page:
         return redirect(url_for("home",username))
+    
     else:
-        return "PLACEHOLDER - FOLIO PAGE FOR " + username + "'s " + page
+        folio = db.getPage(username,page)
+       
+        if folio == "page does not exist":
+            return redirect(url_for("home"))
+       
+        return render_template("user.html",username=username,folio=folio)
 
 
 
@@ -74,7 +80,7 @@ def edit(username="",page=""):
     if "user" in session and not username:
         username = session["user"]
     if not page:
-        return redirect(url_for("home",username))
+        return redirect(url_for("home"))
     else:
         return "PLACEHOLDER - FOLIO EDIT PAGE FOR " + username + "'s " + page
 
