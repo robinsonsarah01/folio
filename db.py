@@ -101,12 +101,24 @@ def delPage(username,pagename):
     return True
     
 
+@user_exists
+def editPage(username,pagename,info,aspect=""):
+    user = coll.find_one({"username":username})
+    if pagename not in user["pages"]:
+        return errors[2]
 
+    if not aspect:
+        delPage(username,pagename)
+        addPage(username,pagename,info)
+        return True
 
+    else:
+        p = user[pagename]
+        p[aspect] = info
+        coll.update({"username":username},
+                    { "$set": {pagename:p} } )
 
-#will implement later if needed
-def editPage(username,pagename,aspect,info):
-    pass
+        return True
 
 
 
@@ -127,4 +139,5 @@ if __name__ == "__main__":
     #addUser("test","test")
     #print checkPass("test","test")
     #print addPage("test","page","<p>here is some stuff yep</p>")
+    #print editPage("test","page","this is my page portfolio")
     print getUserInfo("test")

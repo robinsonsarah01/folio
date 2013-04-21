@@ -69,7 +69,8 @@ def folio(username="",page=""):
         if folio == "page does not exist":
             return redirect(url_for("home"))
        
-        return render_template("user.html",username=username,folio=folio)
+        return render_template("user.html",username=username
+                               ,page=page,folio=folio)
 
 
 
