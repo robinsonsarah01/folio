@@ -102,11 +102,26 @@ def checkPass():
 
 
 @app.route("/getUserInfo",methods=["GET","POST"])
-def dummyajax():
+def getUserInfo():
     username = request.args.get("username","")
     if not username:
         username = session["user"]
     return json.dumps(db.getUserInfo(username))
+
+
+@app.route("/getPage",methods=["GET","POST"])
+def getPage():
+    username = request.args.get("username","")
+    page = request.args.get("page","")
+    if not username:
+        username = session["user"]
+    if not page:
+        page = "about" #default
+
+    return json.dumps(db.getPage(username,page))
+    
+    
+
 
 
 
