@@ -39,9 +39,9 @@ def login():
             email = request.form['new_email']
             password = request.form['new_password']
             #res will be true or "user already exists"
-            res = db.addUser(email,password)
+            res = db.addUser(email,password,name)
 
-            return "<p>PLACEHOLDER - YOU HAVE BEEN REGISTERED</p>" + "<p>" + str(res) + "</p>"
+            return "<p>PLACEHOLDER - YOU HAVE BEEN REGISTERED, " + name + "</p>" + "<p>" + str(res) + "</p>"
 
 
 @app.route("/<username>/",methods = ["GET","POST"])

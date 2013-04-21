@@ -33,12 +33,13 @@ def user_exists(original):
 # -- DB FUNCTIONS
 
 
-def addUser(username,password):
+def addUser(username,password,name):
     if username in [ x["username"] for x in coll.find() ]:
         return errors[0]
     user = { "username" : username
              , "password" : password #temporary
-             , "pages" : [] } #keep track of page names
+             , "pages" : ["about"] #keep track of page names
+             , "about" : "<p>" + name + "</p>" }
     coll.insert(user)
     return True
 
@@ -136,7 +137,8 @@ def dropUsers(): #testing purposes
 
 if __name__ == "__main__":
     connect()
-    #addUser("test","test")
+    #dropUsers()
+    #addUser("test","test","test name")
     #print checkPass("test","test")
     #print addPage("test","page","<p>here is some stuff yep</p>")
     #print editPage("test","page","this is my page portfolio")
