@@ -1,0 +1,33 @@
+/* default style sheet for idleloop.com pages */
+
+HTML { height: 100% }
+BODY { text-align: left; margin: 0; padding: 0; background: #feffed; color: #000000; height: 100% }
+#container { position: relative; height: auto !important; height: 100%; min-height: 100% }
+
+.headertable { width: 100%; margin: 0; border-spacing: 0; background: #007165; border-bottom: solid #3bb3a7 2px }
+.headerlogo { text-align: center; padding: 1em 0 0.5em 0 }
+
+.contenttable { width: 100%; margin: 0; border-spacing: 0; border: none }
+.contentlayout { line-height: 1px; margin:0; padding:0 }
+.contentwidth { width: 40em; padding: 0 1em }	/* 40 em col width, with 1em on sides (0 padding top/bottom) */
+.content { width: 40em; text-align: left; padding: 0.5em 1em 3em 1em } /* extra at bottom for navbanner */
+
+.content a:link, .content a:visited { color: #007165 }
+.content a:hover { color: #3bb3a7 }
+.content a[name]:hover { color: inherit }
+
+#navbanner { width: 100%; margin: 0; position: absolute; bottom: 0;
+	border-spacing: 0; background: #007165; border-top: solid #3bb3a7 2px }
+.navtable { border-spacing: 0.25em; margin: 0.1em auto }
+.nav { background: url(infinity.png) no-repeat center center; height: 26px; padding: 0.2em 1.5em; width: 25%;
+	color: #e1e5d1; text-align: center;	font-size: 80%; font-family: sans-serif; font-weight: bold }
+
+.nav a:link, .nav a:visited { color: #d1e5e3; text-decoration: none }
+.nav a:hover { color: white; text-decoration: none }
+
+HR { border: solid 1px #007165 }
+
+@media handheld, screen and (max-device-width: 480px), screen and (min-resolution: 250dpi)
+{
+	.contentwidth, .content { width: 95% }
+}
