@@ -35,4 +35,5 @@ $(document).ready( function() {
     //console.log(document.URL); //also window.location
     getInfo();
     viewFolio(currpage);
+
 });
