@@ -21,14 +21,13 @@ function getPage(page){
 function loadFolioData(pagedata){
     //can do things to pagedata to make it pretty before this step
 
-    $("#folio_contents").append("<p>"+pagedata+"</p>");
+    $("#folio_contents").empty().append("<p>"+pagedata+"</p>");
 }
 
 
 function viewFolio(page){
     getPage(page); //gets data and loads it
-    console.log(window.location);
-
+    
 }
 
 
