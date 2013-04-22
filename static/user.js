@@ -20,6 +20,7 @@ function getPage(page){
 
 function loadFolioData(pagedata){
     //can do things to pagedata to make it pretty before this step
+    //like mess with it in js and use different methods to display it etc
 
     $("#folio_contents").empty().append("<p>"+pagedata+"</p>");
 }
