@@ -58,8 +58,8 @@ def home(username=""):
 def folio(username="",page=""):
     if not username and "user" not in session:
         return redirect(url_for("login"))
-    if "user" in session and not username:
-        username = session["user"]
+    #if "user" in session and not username: #cannot access other pages when logged in
+     #   username = session["user"]
     if not page:
         return redirect(url_for("home",username))
     
@@ -119,6 +119,54 @@ def getPage():
         page = "about" #default
 
     return json.dumps(db.getPage(username,page))
+
+
+@app.route("/addPage",methods=["GET","POST"])
+def addPage():
+    username = request.args.get("username","")
+    pagename = request.args.get("pagename","")
+    info = request.args.get("info","")
+    
+    if not username:
+        username = session["user"]
+
+    res = False
+    if pagename: #info can be blank
+        res = db.addPage(username,pagename,info)
+            
+    return json.dumps(res)
+
+
+@app.route("/delPage",methods=["GET","POST"])
+def delPage():
+    username = request.args.get("username","")
+    pagename = request.args.get("pagename","")
+    
+    if not username:
+        username = session["user"]
+    
+    res = False
+    if pagename:
+        res = db.delPage(username,pagename)
+
+    return json.dumps(res)
+
+
+@app.route("/editPage",methods=["GET","POST"])
+def editPage():
+    username = request.args.get("username","")
+    pagename = request.args.get("pagename","")
+    info = request.args.get("info","")
+    aspect = request.args.get("aspect","") #works if folio is in dict format
+
+    if not username:
+        username = session["user"]
+
+    res = False
+    if pagename and info:
+        res = db.editPage(username,pagename,info,aspect)
+
+    return res
     
     
 
