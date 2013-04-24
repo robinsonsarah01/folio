@@ -48,7 +48,12 @@ def login():
             #res will be true or "user already exists"
             res = db.addUser(email,password,name)
 
-            return "<p>PLACEHOLDER - YOU HAVE BEEN REGISTERED, " + name + "</p>" + "<p>" + str(res) + "</p>"
+            if res != True:
+                return render_template("login.html",anerror=res)
+
+            username = email
+            pages = ["about"] #what all new users have
+            return redirect(url_for("home",username=username,pages=pages))
 
 
 
