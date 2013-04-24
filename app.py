@@ -64,13 +64,17 @@ def home(username=""):
     if "user" in session and not username:
         username = session["user"]
         
-    info = db.getUserInfo(username)
-    try:
-        pages = info["pages"]
-    except: #fails if info is a string error
-        return redirect(url_for("login",anerror=info))
-
-    return render_template("setup.html",username=username,pages=pages)
+    if request.method == "GET":
+        print "USERNAME: ", username
+        info = db.getUserInfo(username)
+        print "GOT INFO FROM DB"
+        try:
+            pages = info["pages"]
+        except: #fails if info is a string error
+            print "USER DOES NOT EXIST ERROR"
+            return redirect(url_for("login",anerror=info))
+        
+        return render_template("setup.html",username=username,pages=pages)
 
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
