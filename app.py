@@ -27,7 +27,7 @@ def login():
                 error = res
                 if res == False: 
                     error = "Incorrect Password"
-                return render_template("login.html",error=error)
+                return render_template("login.html",anerror=error)
             
             #if all goes well
             session["user"] = username
@@ -35,7 +35,7 @@ def login():
             try:
                 pages = info["pages"]
             except: #fails if info is a string error
-                return render_template("login.html",error=info)
+                return render_template("login.html",anerror=info)
             
             return redirect(url_for("home",username=username,pages=pages)) 
         
@@ -67,8 +67,8 @@ def home(username=""):
     info = db.getUserInfo(username)
     try:
         pages = info["pages"]
-    except(e): #deal with user does not exist errors elsewhere?
-        pages = ["about"]
+    except: #fails if info is a string error
+        return redirect(url_for("login",anerror=info))
 
     return render_template("setup.html",username=username,pages=pages)
 
@@ -93,6 +93,7 @@ def folio(username="",page=""):
 
 
 
+#might not use this?
 @app.route("/<username>/<page>/edit",methods = ["GET","POST"])
 def edit(username="",page=""):
     if not username and "user" not in session:
@@ -106,19 +107,7 @@ def edit(username="",page=""):
 
 
 
-#ajax urls
-
-""" #not to be used - see login url for authentication
-@app.route("/checkPass",methods = ["GET","POST"])
-def checkPass():
-    username = request.args.get("username","")
-    password = request.args.get("password","")
-    res = {}
-    if username and password:
-        res = db.checkPass(username,password)
-    return json.dumps(res)
-"""
-
+#---ajax urls------------------
 
 @app.route("/getUserInfo",methods=["GET","POST"])
 def getUserInfo():
