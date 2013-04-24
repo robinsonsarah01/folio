@@ -32,9 +32,11 @@ def login():
             #if all goes well
             session["user"] = username
             info = db.getUserInfo(username)
+            print "RESULT IN LOGIN: ", info
             try:
                 pages = info["pages"]
             except: #fails if info is a string error
+                print "ERROR IN LOGIN/DB"
                 return render_template("login.html",anerror=info)
             
             return redirect(url_for("home",username=username,pages=pages)) 
@@ -67,7 +69,7 @@ def home(username=""):
     if request.method == "GET":
         print "USERNAME: ", username
         info = db.getUserInfo(username)
-        print "GOT INFO FROM DB"
+        print "GOT INFO FROM DB IN HOME: ", info
         try:
             pages = info["pages"]
         except: #fails if info is a string error
