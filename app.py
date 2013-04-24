@@ -31,8 +31,13 @@ def login():
             
             #if all goes well
             session["user"] = username
+            info = db.getUserInfo(username)
+            try:
+                pages = info["pages"]
+            except: #fails if info is a string error
+                return render_template("login.html",error=info)
             
-            return "PLACEHOLDER - YOU HAVE BEEN LOGGED IN, " + str(username) 
+            return redirect(url_for("home",username=username,pages=pages)) 
         
         else: #if button == "Create my Folio!"
             name = request.form['first_name'] + " " + request.form['last_name']
@@ -44,14 +49,28 @@ def login():
             return "<p>PLACEHOLDER - YOU HAVE BEEN REGISTERED, " + name + "</p>" + "<p>" + str(res) + "</p>"
 
 
+
+@app.route("/logout",methods=["GET","POST"])
+def logout():
+    if "user" in session:
+        session.pop("user",None)
+    return redirect(url_for("login"))
+
+
 @app.route("/<username>/",methods = ["GET","POST"])
 def home(username=""):
     if not username and "user" not in session:
         return redirect(url_for("login"))
     if "user" in session and not username:
         username = session["user"]
+        
+    info = db.getUserInfo(username)
+    try:
+        pages = info["pages"]
+    except(e): #deal with user does not exist errors elsewhere?
+        pages = ["about"]
 
-    return "PLACEHOLDER - HOME PAGE FOR " + username
+    return render_template("setup.html",username=username,pages=pages)
 
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
