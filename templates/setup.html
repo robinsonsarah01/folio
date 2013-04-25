@@ -22,7 +22,7 @@
 
 {% for page in pages %}
 
-<div id="{{page}}" class="left_rectangle" onclick="viewFolio({{page}})"><center>{{page}}</center></div>
+<div id="{{page}}" class="left_rectangle" onclick="viewFolio('{{page}}')"><center>{{page}}</center></div>
 
 {% endfor %}
 <br>
@@ -32,8 +32,7 @@
 <div id="right_scroll">  
   
   <div id="about_me">
-    <div id="user_image"> <!-- delete later? -->
-      user image
+    <div id="user_image">
     </div>
     
   </div>

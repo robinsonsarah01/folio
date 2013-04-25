@@ -7,20 +7,24 @@ function getInfo() {
     return username
 }
 
-function getPage(page){
-    $.getJSON("/getPage",{"username":username,"page":page},function(data){
-	loadFolioData(data);
-    });
-}
-
 function loadFolioData(data){
     //can do things to pagedata to make it pretty before this step
     //like mess with it in js and use different methods to display it etc
     
+    console.log("in loadFolioData");
     $("#contents").empty().append("<p>"+data+"</p>");
 }
 
+function getPage(page){
+    console.log("in getPage: "+page);
+    $.getJSON("/getPage",{"username":username,"page":page},function(data){
+	console.log("in getPage json call");
+	loadFolioData(data);
+    });
+}
+
 function viewFolio(page){
+    //console.log("in viewFolio");
     getPage(page); //gets data and loads it
     
 }
@@ -44,5 +48,7 @@ $(document).ready( function() {
 	$('.left_rectangle').css("color","white");
 	$('#' + this.id).css("color","#8E978D");
     });
+
+    getInfo()
 
 });
