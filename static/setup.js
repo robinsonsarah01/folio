@@ -17,7 +17,7 @@ function loadFolioData(data,page){
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <img src="/static/shan.png"></center><br><br> <form> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#about_me").append('<center> <img src="/static/shan.png"></center><br><br> <form><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
     }
 }
 
@@ -37,17 +37,28 @@ function viewFolio(page){
 
 
 
+function saveBlurb(){
+    //do some stuff thru ajax and save the about me sighs at
 
+    info = $($("#blurb")).val(); //val of textarea
+
+    $.getJSON("/editPage",{"username"=username,"pagename"="about","info"=info},
+	      function(data){
+		 //not necessary but nice:
+		  //fix data that appears on page
+	      });
+}
 
 function createFolio() {
-    $("#contents").empty().append("<p id='add'>this is where fancy stuff to name new folio and add contents goes</p>");
+    $("#about_me").remove()
+    $("#contents").empty().append("<p id='add'>this is where fancy stuff to name new folios and add contents goes</p>");
 }
 
 
 $(document).ready( function() {
     $("#add_folio").click(createFolio);
 
-    // $("#blurb_button_save").click(saveBlurb);
+    $("#blurb_save").click(saveBlurb);
 
     //css is all peter, thanks peter
     $('.left_rectangle').click(function(){
@@ -58,5 +69,7 @@ $(document).ready( function() {
     });
 
     getInfo()
+
+    //possibly load page thru js?
 
 });

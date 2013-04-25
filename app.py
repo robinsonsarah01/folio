@@ -176,7 +176,7 @@ def editPage():
     username = request.args.get("username","")
     pagename = request.args.get("pagename","")
     info = request.args.get("info","")
-    aspect = request.args.get("aspect","") #works if folio is in dict format
+    aspect = request.args.get("aspect","") #works if folios are in dict format
 
     if not username:
         username = session["user"]
