@@ -42,7 +42,7 @@ function saveBlurb(){
 
     info = $($("#blurb")).val(); //val of textarea
 
-    $.getJSON("/editPage",{"username"=username,"pagename"="about","info"=info},
+    $.getJSON("/editPage",{"username":username,"pagename":"about","info":info},
 	      function(data){
 		 //not necessary but nice:
 		  //fix data that appears on page
@@ -52,6 +52,8 @@ function saveBlurb(){
 function createFolio() {
     $("#about_me").remove()
     $("#contents").empty().append("<p id='add'>this is where fancy stuff to name new folios and add contents goes</p>");
+
+    //$("#add").click(dostuff);
 }
 
 
