@@ -70,9 +70,9 @@ function createFolio() {
 $(document).ready( function() {
     $("#add_folio").click(createFolio);
 
-    $("#blurb_save").click(saveBlurb);
+    //$("#blurb_save").click(saveBlurb);
 
-    //css is all peter, thanks peter
+    //css is all/mostly peter, thanks peter
     $('.left_rectangle').click(function(){
 	$('.left_rectangle').css("background-color","#8E978D");
 	$('#' + this.id).css("background-color","#CDF2D6");
@@ -80,7 +80,9 @@ $(document).ready( function() {
 	$('#' + this.id).css("color","#8E978D");
     });
 
-    getInfo()
+    getInfo();
+    viewFolio("about"); //start things off
+    //A NOTE: does not change rect color maybe set later?
 
     //possibly load page thru js?
 
