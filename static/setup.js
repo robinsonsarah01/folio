@@ -13,12 +13,17 @@ function loadFolioData(data,page){
     
     //console.log("in loadFolioData");
     $("#about_me").remove();
-    $("#contents").empty().append("<p id='data'>"+data+"</p>");
+    $("#contents").empty()//.append("<p id='data'>"+data+"</p>");
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
 	$("#about_me").append('<center> <img src="/static/shan.png"></center><br><br> <form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#blurb").text(data);
 	$("#blurb_save").click(saveBlurb);
+    }
+    
+    else{
+	$("#contents").append("<p id='data'>"+data+"</p>");
     }
 }
 

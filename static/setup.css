@@ -89,7 +89,7 @@ top:1em;
 }
 
 
-/*#about_me input{
+#about_me input{
 position:relative; 
 border-radius: 6px;
   border: 2px solid #97C4AD; 
@@ -107,12 +107,13 @@ border-radius: 6px;
 top:15em;
 font-size:2em;
   background: white;
-  margin: 0 0 5px 0;}*/
+  margin: 0 0 5px 0;}
 
 #blurb {
     resize: none;
     position:absolute;
     top:15em;
+    left:2em;
     
     border-radius: 6px;
     border: 2px solid #97C4AD; 
@@ -126,8 +127,8 @@ font-size:2em;
     inset 0 0 2px  #97C4AD;
     0 0 2px #97C4AD; 
     padding: 6px;
-    width:90%; // might change this for my small computer
-    height:40em;
+    width:90%;
+    height:7em;
     font-size:2em;
     background: white;
     margin: 0 0 5px 0;
@@ -152,9 +153,9 @@ font-size:2em;
     background: white;
     margin: 0 0 5px 0;
 
-    position: relative;
+    position: absolute;
     left: 10em;
-    top: 3em;
+    top: 24em;
 
 }
 
