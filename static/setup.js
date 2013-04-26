@@ -61,7 +61,7 @@ function saveBlurb(){
 
 function createFolio() {
     $("#about_me").remove()
-    $("#contents").empty().append("<p id='add'>this is where fancy stuff to name new folios and add contents goes</p>");
+    $("#contents").empty().append("<div id='add'>this is where fancy stuff to name new folios and add contents goes</div>");
 
     //$("#add").click(dostuff);
 }
@@ -80,10 +80,10 @@ $(document).ready( function() {
 	$('#' + this.id).css("color","#8E978D");
     });
 
+    // startup stuff
     getInfo();
-    viewFolio("about"); //start things off
-    //A NOTE: does not change rect color maybe set later?
-
-    //possibly load page thru js?
+    viewFolio("about"); //load page thru js
+    //change color of about tab
+    $("#about").css("background-color","#CDF2D6").css("color","#8E978D");
 
 });
