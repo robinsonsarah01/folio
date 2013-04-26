@@ -47,12 +47,15 @@ function saveBlurb(){
     //do some stuff thru ajax and save the about me sighs at
 
     info = $($("#blurb")).val(); //val of textarea
+    $("#blurb_save").attr("disabled","disabled");
 
     $.getJSON("/editPage",{"username":username,"pagename":"about","info":info},
 	      function(data){
-		  //not necessary but nice:
-		  //fix data that appears on page?
-		  $("#blurb_form").prepend("<p id='saved'>Saved!</p>");
+		  $("#blurb_form").prepend("<p id='saved'><b>Saved!</b></p>");
+
+		  $("#saved").fadeOut(2500,function(){
+		      $("#blurb_save").removeAttr("disabled");
+		  });
 	      });
 }
 
