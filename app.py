@@ -185,7 +185,7 @@ def editPage():
     if pagename and info:
         res = db.editPage(username,pagename,info,aspect)
 
-    return res
+    return json.dumps(res)
     
     
 
