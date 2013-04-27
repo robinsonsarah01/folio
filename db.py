@@ -143,3 +143,25 @@ if __name__ == "__main__":
     #print addPage("test","page","<p>here is some stuff yep</p>")
     #print editPage("test","page","this is my page portfolio")
     print getUserInfo("test")
+
+
+
+"""
+new architecture:
+
+each user is a dictionary in the db
+
+{ username, name, password, etc ... 
+
+folios : [ list of folio names ] 
+--> currently exists as "pages"
+
+individual folios (under their names, in top level dictionary) : { description , list of indexes of projects , etc }
+--> currently saved as string descriptions (current methods should work with dict?)
+
+projects : [ { p1 } , { p2 } , etc ]
+--> does not exist yet
+--> to access projects from folios you take userdict[projects] and use the indexes to take the projects you want for that specific folio
+
+
+"""
