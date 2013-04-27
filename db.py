@@ -38,8 +38,9 @@ def addUser(username,password,name):
         return errors[0]
     user = { "username" : username
              , "password" : password #temporary
-             , "pages" : ["about"] #keep track of page names
-             , "about" : "<p>" + name + "</p>" }
+             , "folios" : ["about"] #keep track of folio names
+             , "about" : "<p>" + name + "</p>" #temporary
+             , "projects" : [ ] }
     coll.insert(user)
     return True
 
@@ -56,9 +57,10 @@ def checkPass(username,password):
 def getUserInfo(username):
     user = coll.find_one({"username":username})
     info = { "username" : user["username"]
-             , "pages" : user["pages"] }
+             , "folios" : user["folios"]
+             , "projects" : user["projects"] }
 
-    for p in user["pages"]:
+    for p in user["folios"]:
         info[p] = user[p]
     
     return info
@@ -66,7 +68,7 @@ def getUserInfo(username):
 @user_exists
 def getPage(username,page):
     user = coll.find_one({"username":username})
-    if page in user["pages"]:
+    if page in user["folios"]:
         return user[page]
     return errors[2]
 
@@ -74,13 +76,13 @@ def getPage(username,page):
 @user_exists
 def addPage(username,pagename,pageinfo):
     user = coll.find_one({"username":username})
-    if pagename in user["pages"]:
+    if pagename in user["folios"]:
         return errors[3]
     
-    p = user["pages"]
+    p = user["folios"]
     p.append(pagename)
     coll.update({"username":username},
-                { "$set": {"pages":p
+                { "$set": {"folios":p
                            ,pagename:pageinfo} } )
     
     return True
@@ -89,12 +91,12 @@ def addPage(username,pagename,pageinfo):
 @user_exists
 def delPage(username,pagename):
     user = coll.find_one({"username":username})
-    if pagename not in user["pages"]:
+    if pagename not in user["folios"]:
         return errors[2]
 
-    p = [ x for x in user["pages"] if x != pagename ]
+    p = [ x for x in user["folios"] if x != pagename ]
     coll.update({"username":username},
-                { "$set": {"pages":p} } )
+                { "$set": {"folios":p} } )
     
     coll.update({"username":username},
                 { "$unset" : { pagename : "" } } )
@@ -105,7 +107,7 @@ def delPage(username,pagename):
 @user_exists
 def editPage(username,pagename,info,aspect=""):
     user = coll.find_one({"username":username})
-    if pagename not in user["pages"]:
+    if pagename not in user["folios"]:
         return errors[2]
 
     if not aspect:
@@ -120,6 +122,36 @@ def editPage(username,pagename,info,aspect=""):
                     { "$set": {pagename:p} } )
 
         return True
+
+
+#project stuff
+
+@user_exists
+def getProjects(username):
+    user = coll.find_one({"username":username})
+    return user["projects"]
+
+
+@user_exists
+def addProject(username,projectinfo):
+    user = coll.find_one({"username":username})
+
+    p = user["projects"]
+    p.append(projectinfo)
+    coll.update({"username":username},
+                { "$set": {"projects":p}})
+    
+    return True #could return index instead
+
+
+@user_exists
+def delProject(username,projectindex="",projectinfo=""):
+    pass
+
+
+@user_exists
+def editProject(username,projectinfo,projectindex=""):
+    pass
 
 
 
@@ -142,7 +174,7 @@ if __name__ == "__main__":
     #print checkPass("test","test")
     #print addPage("test","page","<p>here is some stuff yep</p>")
     #print editPage("test","page","this is my page portfolio")
-    print getUserInfo("test")
+    #print getUserInfo("test")
 
 
 
