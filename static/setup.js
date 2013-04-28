@@ -27,8 +27,8 @@ function loadFolioData(data,page){
     
     else{
 	//temporary - needs css / pretty-fying
-	$("#contents").append("<p id='data'>"+data['description']+"</p>");
-	$("#contents").append("<p id='projects'>"+data['projects']+"</p>");
+	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div>");
+	$("#folio_description").text(data['description']);
     }
 }
 

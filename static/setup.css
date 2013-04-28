@@ -45,6 +45,12 @@ html{
     z-index:99;
 }
 
+h2 {
+    font-size:2em;
+    color: #8E978D;
+}
+
+
 #logout{
     position:absolute;;
     right:1%;
@@ -55,7 +61,7 @@ html{
 #left_scroll{
     position:absolute;
     left:1%;
-    top:5em;
+    top:3em;
     width:16%;
     height:85%;
 }
