@@ -39,7 +39,7 @@ def addUser(username,password,name):
     user = { "username" : username
              , "password" : password #temporary
              , "folios" : ["about"] #keep track of folio names
-             , "about" : "<p>" + name + "</p>" #temporary
+             , "about" : name #temporary
              , "projects" : { } }
     coll.insert(user)
     return True
