@@ -34,7 +34,7 @@ def login():
             info = db.getUserInfo(username)
             print "RESULT IN LOGIN: ", info
             try:
-                pages = info["pages"]
+                pages = info["folios"]
             except: #fails if info is a string error
                 print "ERROR IN LOGIN/DB"
                 return render_template("login.html",anerror=info)
@@ -53,7 +53,9 @@ def login():
 
             username = email
             pages = ["about"] #what all new users have
-            return redirect(url_for("home",username=username,pages=pages))
+            projects = []
+            return redirect(url_for("home",username=username,pages=pages
+                                    ,projects=projects))
 
 
 
@@ -77,11 +79,13 @@ def home(username=""):
         print "GOT INFO FROM DB IN HOME: ", info
         try:
             pages = info["folios"]
+            projects = info["projects"]
         except: #fails if info is a string error
             print "USER DOES NOT EXIST ERROR"
             return redirect(url_for("login",anerror=info))
         
-        return render_template("setup.html",username=username,pages=pages)
+        return render_template("setup.html",username=username,pages=pages
+                               ,projects=projects)
 
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
@@ -95,16 +99,19 @@ def folio(username="",page=""):
     
     else:
         folio = db.getPage(username,page)
+        projects = db.getProjects(username)
        
         if folio == "folio or project does not exist":
             return redirect(url_for("home"))
        
         return render_template("user.html",username=username
-                               ,page=page,folio=folio)
+                               ,page=page,folio=folio,projects=projects)
 
 
 
-#might not use this?
+#might not use this - edit happens in /username (home page) thru js
+
+"""
 @app.route("/<username>/<page>/edit",methods = ["GET","POST"])
 def edit(username="",page=""):
     if not username and "user" not in session:
@@ -115,7 +122,7 @@ def edit(username="",page=""):
         return redirect(url_for("home"))
     else:
         return "PLACEHOLDER - FOLIO EDIT PAGE FOR " + username + "'s " + page
-
+"""
 
 
 #---ajax urls------------------
@@ -146,15 +153,18 @@ def getPage():
 def addPage():
     username = request.args.get("username","")
     pagename = request.args.get("pagename","")
-    info = request.args.get("info","")
-    
+    des = request.args.get("description","")
+    print username,pagename,des
+
     if not username:
         username = session["user"]
 
     res = False
     if pagename: #info can be blank
-        res = db.addPage(username,pagename,info)
+        print "ADDING FOLIO"
+        res = db.addPage(username,pagename,des)
             
+    print res
     return json.dumps(res)
 
 

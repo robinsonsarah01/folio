@@ -74,13 +74,14 @@ def getPage(username,page):
 
 
 @user_exists
-def addPage(username,pagename,pageinfo):
+def addPage(username,pagename,description):
     user = coll.find_one({"username":username})
     if pagename in user["folios"]:
         return errors[3]
     
     p = user["folios"]
     p.append(pagename)
+    pageinfo = { "description":description,"projects":[] }
     coll.update({"username":username},
                 { "$set": {"folios":p
                            ,pagename:pageinfo} } )
@@ -240,6 +241,7 @@ if __name__ == "__main__":
     #addUser("test","test","test name")
     #print checkPass("test","test")
     #print addPage("test","page",{"description":"this is my page folio","projects":[]})
+    #print delPage("test","Software Dev")
     #print editPage("test","about","test name - i am cool","description")
     #print delProject("test","p1")
     #print addProject("test","p1",{"description":"this is my first project"})
