@@ -226,9 +226,9 @@ font-size:2em;
     background: white;
     margin: 0 0 5px 0;
 
-    position: absolute;
-    left: 7.5em;
-    top: 28em;
+    position: relative;
+    left: 5em;
+    top: -1.3em;
 }
 
 
@@ -245,7 +245,15 @@ font-size:2em;
 
 #add_error {
     positon:relative;
-    left:20em;
+    left:5em;
+    color:#BF3030;
+}
+
+#title_note {
+    position:relative;
+    left:24em;
+    top:-2.5em;
+    color:#8E978D;
 }
 
 

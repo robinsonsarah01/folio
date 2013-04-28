@@ -112,7 +112,7 @@ function saveBlurb(){
 
 function createFolio() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Folio!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<div id='add'><h1>Add a new Folio!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
 
     $("#create").click(addFolio);
 }
@@ -122,6 +122,18 @@ function addFolio() { //actually goes to server
 
     name = $("#add_title").val();
     des = $("#add_description").val();
+
+    if (! /^[a-zA-Z0-9]+$/.test(name) ){
+	$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
+	$("#add_error").fadeOut(2500,function(){
+	    
+	    $("#add_title").val("");
+	    $("#create").removeAttr("disabled");
+	    $("#add_error").remove();
+	});
+	return false; //break function
+    }
+
     //info = { "description" : description, "projects" : [] };
 
     $.getJSON("/addPage",{"username":username,"pagename":name,"description":des},
