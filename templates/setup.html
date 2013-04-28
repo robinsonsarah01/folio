@@ -1,53 +1,74 @@
 <!doctype HTML>
-<html>
-
-<script src="../static/jquery.js"></script>                  
+<html>             
 
 <head>
 
 
-<link rel="stylesheet" type="text/css" href="../static/setup.css">
+<link rel="stylesheet" type="text/css" href="/static/setup.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body> 
   
-<div id="rectangle"><input type="hidden" value="my text" name="my_hidden_field/">
+<div id="rectangle"><input type="hidden" value="{{username}}" name="my_username">
 </div>
 
 <div id="login" class="back-rectangle">
       <h1 id="logo">Folio</h1>
-      <span id="logout"> Log Out</span>
+      <span id="logout"><a href="/logout">Log Out</a></span>
 
       </div>
 <div id="left_scroll">
-<div id="about_select" class="left_rectangle"> <center>About Me</center></div>
-<div id="dev_select" class="left_rectangle"> <center>Developer</center></div>
-<div id="art_select" class="left_rectangle"> <center>Artist</center></div>
-<div id="music_select" class="left_rectangle"> <center>Musician</center></div>
-<br>
+
+<h2><center>Folios</center></h2>
+
+{% for page in pages %}
+
+<div id="{{page}}" class="left_rectangle" onclick="viewFolio('{{page}}')"><center>{{page}}</center></div>
+
+{% endfor %}
+<!--br-->
 <div id="add_folio" class="left_rectangle"><center><img src="../static/plus.png" width=20%  height=100%></img></center></div>
+
+<!--br-->
+
+<h2><center>Projects</center></h2>
+
+<div id="viewProj" class="left_rectangle"><center>View Projects</center></div>
+<div id="newProj" class="left_rectangle"><center>Add Project</center></div>
+
 </div>
 
 <div id="right_scroll">  
+  
+  <!-- NOT IN USE --><!--div id="about_me"> 
+    <div id="user_image">
+    </div>
+    
+  </div-->
 
-<div id="about_me">
-   <center> <img src="../static/shan.png"></center>
-	<br><br>		
-<div id="name">
-<form>
-<center><input type="text" name="firstname" placeholder="First Name"></center><br><br>
-<center><input  type="text" name="lastname" placeholder="Last Name"></center><br><br>
-<textarea type="text"  id="blurb" resize="false" type="text" name="blurb" placeholder="Write about yourself here."></textarea>
-</form>
+
+
+  <div id="contents">
+    <!-- LOADING PAGE THRU JAVASCRIPT FOR FUNCTIONALITY -->
+    <!--div id="about_me">
+      <center> <img src="/static/shan.png"></center>
+      <br><br>		
+      <form id="blurb_form">
+	<button type="button" id="blurb_save" name="Save">Save</button>
+	<textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea>
+      </form>
+    </div-->
+    
+    
+  </div>
+  
 </div>
 
 
+<script src="/static/jquery.js"></script>
+<script type="text/javascript" src="/static/setup.js"></script>
 
-</div>
-</div>
-
-<script type="text/javascript" src="../static/setup.js"></script>
 </body>
 </html>
 

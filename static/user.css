@@ -1,0 +1,66 @@
+html{
+    background-image: url('../static/image.png');
+    background-repeat: repeat;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;		 
+    letter-spacing: -1px;		
+    overflow-y: auto;
+    background-color: transparent; 
+}
+
+#login.back-rectangle{
+    background-color: #8E978D;
+    font-color: #FFFFFF;
+    position: absolute;
+    display: block;
+    height: 4em;
+    width: 100%;
+    left: 0%;
+    top: 0%;
+    z-index:2;
+}
+
+.left_rectangle{
+    position: relative;
+    background-color: #8E978D;
+    display: block;
+    height: 3em;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
+}  
+
+.left_rectangle h1{
+    color: white;
+}
+
+#logo{
+    position:absolute;
+    display: block;
+    left: 0%;
+    top: -.9em;
+    font-size:4em;
+    color: white;
+    z-index:99;
+}
+
+#left_scroll{
+    position:absolute;
+    left:1%;
+    top:5em;
+    width:16%;
+    height:85%;
+}
+
+#right_scroll{
+    position:absolute;
+    right:1%;
+    top:5em;
+    width:80%;
+    height:85%;
+    overflow-y:scroll;
+    box-shadow: 3px 3px 7px #8E978D;
+    background-image: url('../static/groovepaper.png');
+    background-repeat: repeat;
+}
+

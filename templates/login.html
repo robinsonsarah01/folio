@@ -17,19 +17,24 @@
   <div id="login" class="back-rectangle">
       <h1 id="logo">Folio</h1>
       <form name="login_form" action="" method="POST">
-    <!--name="input" action="" method="POST"-->
-      <div id="login_email">
-	Username<br><input type="text" class = "typing" name="login" placeholder="Username"><br>
-      </div>
 
-      <div id="login_pass">
-	Password<br> <input type="password" class = "typing" name="password" placeholder="Password">
-      </div>
-      
-      <div id="login_submit">
-	<input type="submit" name="button" value="Login">
-      </div>
-  </form>
+	{% if anerror %}
+	<div id="error"><b> {{ anerror }} </b></div>
+	{% endif %}
+
+    <!--name="input" action="" method="POST"-->
+    <div id="login_email">
+      Username<br><input type="text" class = "typing" name="login" placeholder="Username"><br>
+    </div>
+    
+    <div id="login_pass">
+      Password<br> <input type="password" class = "typing" name="password" placeholder="Password">
+    </div>
+    
+    <div id="login_submit">
+      <input type="submit" name="button" value="Login">
+    </div>
+      </form>
   </div>
   
 
