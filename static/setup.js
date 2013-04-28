@@ -27,10 +27,30 @@ function loadFolioData(data,page){
     
     else{
 	//temporary - needs css / pretty-fying
-	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div>");
+	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div>");
 	$("#folio_description").text(data['description']);
+	$("#folio_save").click({pagename:page},saveFolio);
     }
 }
+
+
+function saveFolio(event){
+    page = event.data.pagename;
+    des = $($("#folio_description")).val();
+    $("#folio_save").attr("disabled","disabled");
+
+    $.getJSON("/editPage",{"username":username,"pagename":page,
+			   "info":des,"aspect":"description"},
+	      function(data){
+		  $("#edit").append("<p class='saved' id='folio_saved'><b>Saved!</b></p>");
+		  
+		  $("#folio_saved").fadeOut(2500,function(){
+		      $("#folio_save").removeAttr("disabled");
+		      $("#folio_saved").remove();
+		  });
+	      });
+}
+
 
 function getPage(page){
     //console.log("in getPage: "+page);
@@ -61,6 +81,7 @@ function saveBlurb(){
 
 		  $("#blurb_saved").fadeOut(2500,function(){
 		      $("#blurb_save").removeAttr("disabled");
+		      $("#blurb_saved").remove();
 		  });
 	      });
 }
