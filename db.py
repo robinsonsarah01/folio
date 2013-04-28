@@ -4,8 +4,8 @@ conn = Connection("mongo2.stuycs.org")
 global db,coll
 errors = ["user already exists"
           ,"user does not exist"
-          ,"page does not exist"
-          ,"page already exists"]
+          ,"folio or project does not exist"
+          ,"folio or project already exists"]
 
 
 def connect():
@@ -40,7 +40,7 @@ def addUser(username,password,name):
              , "password" : password #temporary
              , "folios" : ["about"] #keep track of folio names
              , "about" : "<p>" + name + "</p>" #temporary
-             , "projects" : [ ] }
+             , "projects" : { } }
     coll.insert(user)
     return True
 
@@ -111,8 +111,12 @@ def editPage(username,pagename,info,aspect=""):
         return errors[2]
 
     if not aspect:
-        delPage(username,pagename)
-        addPage(username,pagename,info)
+        #delPage(username,pagename) #lazy version
+        #addPage(username,pagename,info)
+        
+        coll.update({"username":username},
+                    { "$set": {pagename:info} } )
+        
         return True
 
     else:
@@ -133,25 +137,88 @@ def getProjects(username):
 
 
 @user_exists
-def addProject(username,projectinfo):
+def addProject(username,projectname,projectinfo):
     user = coll.find_one({"username":username})
 
     p = user["projects"]
-    p.append(projectinfo)
+
+    if projectname in p.keys():
+        return errors[3]
+
+    p[projectname] = projectinfo
     coll.update({"username":username},
                 { "$set": {"projects":p}})
     
-    return True #could return index instead
+    return True
 
 
 @user_exists
-def delProject(username,projectindex="",projectinfo=""):
-    pass
+def delProject(username,projectname):
+    user = coll.find_one({"username":username})
+
+    p = { n : p for n,p in user["projects"].iteritems() if n != projectname }
+    coll.update({"username":username},
+                { "$set": {"projects":p}})
+
+    for folio in user["folios"]:
+        delProjFromFolio(username,folio,projectname)
+    
+    return True
+    
 
 
 @user_exists
-def editProject(username,projectinfo,projectindex=""):
-    pass
+def editProject(username,projectname,projectinfo,aspect=""):
+    user = coll.find_one({"username":username})
+    if projectname not in user["projects"].keys():
+        return errors[2]
+
+    projects = user["projects"]
+
+    if not aspect:
+        projects[projectname] = projectinfo
+    else:
+        projects[projectname][aspect] = projectinfo
+
+    coll.update({"username":username},
+                { "$set": {"projects":projects} } )
+
+    return True
+
+
+
+@user_exists
+def addProjToFolio(username,folio,project):
+    #used separately from addProject thru tagging ability
+    
+    user = coll.find_one({"username":username})
+    
+    if folio not in user["folios"]:
+        return errors[2]
+
+    f = user[folio]
+    f["projects"].append(project)
+    
+    coll.update({"username":username},
+                { "$set": {folio:f}})
+
+    return True
+
+
+@user_exists
+def delProjFromFolio(username,folio,project):
+    #used in delProject and separately
+
+    user = coll.find_one({"username":username})
+
+    f = user[folio]
+    if project in f["projects"]: #f[p] is a list of str project names
+        f["projects"].remove(project)
+
+    coll.update({"username":username},
+                { "$set": {folio:f}})
+
+    return True
 
 
 
@@ -172,9 +239,14 @@ if __name__ == "__main__":
     #dropUsers()
     #addUser("test","test","test name")
     #print checkPass("test","test")
-    #print addPage("test","page","<p>here is some stuff yep</p>")
-    #print editPage("test","page","this is my page portfolio")
-    #print getUserInfo("test")
+    #print addPage("test","page",{"description":"this is my page folio","projects":[]})
+    #print editPage("test","about","test name - i am cool","description")
+    #print delProject("test","p1")
+    #print addProject("test","p1",{"description":"this is my first project"})
+    #print addProjToFolio("test","page","p1")
+    #print delProjFromFolio("test","page","p1")
+    #print editProject("test","p1","this is my first project, yo","description")
+    print getUserInfo("test")
 
 
 
@@ -186,14 +258,13 @@ each user is a dictionary in the db
 { username, name, password, etc ... 
 
 folios : [ list of folio names ] 
---> currently exists as "pages"
+--> used to be "pages"
 
-individual folios (under their names, in top level dictionary) : { description , list of indexes of projects , etc }
---> currently saved as string descriptions (current methods should work with dict?)
+individual folios (under their names, in top level dictionary) : { description , list of names of projects , etc }
+--> used to be saved as just string descriptions (current methods work with dictionaries)
 
-projects : [ { p1 } , { p2 } , etc ]
---> does not exist yet
---> to access projects from folios you take userdict[projects] and use the indexes to take the projects you want for that specific folio
+projects : { p1name: { p1 } , p2name: { p2 } , etc }
+--> to access projects from folios you take userdict[projects] and use the names to take the projects you want for that specific folio
 
 
 """

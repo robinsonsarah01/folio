@@ -14,7 +14,7 @@ def login():
         return render_template("login.html")
     else: 
         if "user" in session:
-                return "we have issues." #aka this is not a thing
+                return "we have issues right now." #aka this is not a thing
 
         button = request.form["button"]
         if button == "Login":
@@ -76,7 +76,7 @@ def home(username=""):
         info = db.getUserInfo(username)
         print "GOT INFO FROM DB IN HOME: ", info
         try:
-            pages = info["pages"]
+            pages = info["folios"]
         except: #fails if info is a string error
             print "USER DOES NOT EXIST ERROR"
             return redirect(url_for("login",anerror=info))
@@ -96,7 +96,7 @@ def folio(username="",page=""):
     else:
         folio = db.getPage(username,page)
        
-        if folio == "page does not exist":
+        if folio == "folio or project does not exist":
             return redirect(url_for("home"))
        
         return render_template("user.html",username=username
