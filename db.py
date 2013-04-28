@@ -144,7 +144,7 @@ def addProject(username,projectname,projectinfo):
 
     if projectname in p.keys():
         return errors[3]
-
+    
     p[projectname] = projectinfo
     coll.update({"username":username},
                 { "$set": {"projects":p}})

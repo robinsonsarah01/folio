@@ -120,6 +120,8 @@ def edit(username="",page=""):
 
 #---ajax urls------------------
 
+#folio (page) ajax stuff
+
 @app.route("/getUserInfo",methods=["GET","POST"])
 def getUserInfo():
     username = request.args.get("username","")
@@ -186,8 +188,97 @@ def editPage():
         res = db.editPage(username,pagename,info,aspect)
 
     return json.dumps(res)
+
+
+#projects ajax stuff
+
+@app.route("/getProjects",methods=["GET","POST"])
+def getProjects():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
+
+    return json.dumps(db.getProjects(username))
+
+
+@app.route("/addProject",methods=["GET","POST"])
+def addProject():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
+
+    projectname = request.args.get("projectname","")
+    projectinfo = request.args.get("projectinfo","") #dict w/ description, etc
+
+    res = False
+    if projectname:
+        res = db.addProject(username,projectname,projectinfo)
+
+    return json.dumps(res)
+
+
+@app.route("/delProject",methods=["GET","POST"])
+def delProject():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
     
+    projectname = request.args.get("projectname","")
+
+    res = False
+    if projectname:
+        res = db.delProject(username,projectname)
+
+    return json.dumps(res)
+
+
+@app.route("/editProject",methods=["GET","POST"])
+def editProject():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
     
+    projectname = request.args.get("projectname","")
+    projectinfo = request.args.get("projectinfo","")
+    aspect = request.args.get("aspect","")
+
+    res = False
+    if projectname and projectinfo:
+        res = db.editProject(username,projectname,projectinfo,aspect)
+
+    return json.dumps(res)
+
+
+@app.route("/addProjToFolio",methods=["GET","POST"])
+def addProjToFolio():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
+        
+    folio = request.args.get("folio","") #aka 'page'
+    project = request.args.get("project","") #name not info
+
+    res = False
+    if folio and project:
+        res = db.addProjToFolio(username,folio,project)
+
+    return json.dumps(res)
+
+
+@app.route("/delProjFromFolio",methods=["GET","POST"])
+def delProjFromFolio():
+    username = request.args.get("username","")
+    if not username:
+        username = session['user']
+        
+    folio = request.args.get("folio","") #aka 'page'
+    project = request.args.get("project","") #name not info
+
+    res = False
+    if folio and project:
+        res = db.delProjFromFolio(username,folio,project)
+
+    return json.dumps(res)
 
 
 
