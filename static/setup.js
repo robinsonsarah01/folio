@@ -26,10 +26,11 @@ function loadFolioData(data,page){
     }
     
     else{
-	//temporary - needs css / pretty-fying
-	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div>");
+	//temporary - projects need to be a list
+	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button><div id='delete_note'>Be careful, this cannot be undone!</div>");
 	$("#folio_description").text(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
+	$("#folio_delete").click({pagename:page},delFolio);
     }
 }
 
@@ -49,6 +50,25 @@ function saveFolio(event){
 		      $("#folio_saved").remove();
 		  });
 	      });
+}
+
+function delFolio(event){
+    page = event.data.pagename;
+    $("#folio_delete").attr("disabled","disabled");
+
+    $.getJSON("/delPage",{"username":username,"pagename":page}
+	      ,function(data){
+		  if (data == true){
+		      window.location.reload(true);
+		  }
+		  else {
+		      console.log(data);
+		      $("#contents").append("<p id='del_error'>Something went wrong. Please try again.</p>");
+		      $("#folio_delete").removeAttr("disabled");
+		  }
+	      });
+		  
+
 }
 
 
