@@ -27,7 +27,7 @@ function loadFolioData(data,page){
     
     else{
 	//temporary - projects need to be a list
-	$("#contents").append("<h2>This is my "+page+" folio</h2><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button><div id='delete_note'>Be careful, this cannot be undone!</div>");
+	$("#contents").append("<h2>This is my "+page+" folio</h2><a id='folio_link' href=/"+username+"/"+page+">View this folio</a><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button><div id='delete_note'>Be careful, this cannot be undone!</div>");
 	$("#folio_description").text(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
 	$("#folio_delete").click({pagename:page},delFolio);

@@ -286,7 +286,12 @@ font-size:2em;
 #contents h2 {
     position:relative;
     left:1em;
+}
 
+#folio_link {
+    position:relative;
+    left:5em;
+    top:-2em;
 }
 
 #folio_save {
