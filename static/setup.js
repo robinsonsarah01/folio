@@ -1,10 +1,16 @@
 var username
+var folios
+var projects
 
 function getInfo() {
     var url = document.URL;
     var info = url.split("/");
     username = info[3]
-    return username
+
+    $.getJSON("/getUserInfo",{"username":username},function(data){
+	folios = data['folios'];
+	projects = data['projects'];
+    });
 }
 
 
@@ -16,7 +22,7 @@ function loadFolioData(data,page){
     
     //console.log("in loadFolioData");
     $("#about_me").remove();
-    $("#contents").empty()//.append("<p id='data'>"+data+"</p>");
+    $("#contents").empty(); //.append("<p id='data'>"+data+"</p>");
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
@@ -108,7 +114,7 @@ function saveBlurb(){
 
 
 
-// create
+// CREATE FOLIO STUFF
 
 function createFolio() {
     $("#about_me").remove()
@@ -153,6 +159,10 @@ function addFolio() { //actually goes to server
 }
 
 
+
+
+
+//PROJECT STUFF
 
 //create project
 
@@ -202,11 +212,24 @@ function addProject() { //actually goes to server
 }
 
 
+function viewProjects(){
+    $("#about_me").remove();
+    var projstr = "";
+    for (var proj in projects){
+	projstr+= ("<li>" + proj + "</li>");
+    }
+    $("#contents").empty().append("<ul>"+projstr+"</ul>");
+
+}
+
+
+
 // startup
 
 $(document).ready( function() {
     $("#add_folio").click(createFolio);
     $("#newProj").click(createProject);
+    $("#viewProj").click(viewProjects);
     //$("#blurb_save").click(saveBlurb);
 
     //css is all/mostly peter, thanks peter
@@ -225,7 +248,5 @@ $(document).ready( function() {
     //change color of about tab
     $("#about").css("background-color","#CDF2D6").css("color","#8E978D");
 
-    $('#folio_save').css('position','relative');
-    $('#folio_save').css('left','6em');
 
 });
