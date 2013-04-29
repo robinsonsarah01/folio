@@ -214,14 +214,35 @@ function addProject() { //actually goes to server
 
 function viewProjects(){
     $("#about_me").remove();
+    $("#contents").empty().append("<div id='projects'></div>");
+    
     var projstr = "";
     for (var proj in projects){
-	projstr+= ("<div id='"+proj+"'>" + proj + "</div><br>");
+	projstr+= ("<br><div id='proj_"+proj+"'>" + proj + "<button class='editProj' type='button' id='"+proj+"' name='Edit Project'>Edit Project</button></div>");
     }
-    $("#contents").empty().append(""+projstr+"");
+    
+    $("#projects").append(""+projstr+"");
+    $(".editProj").click(editProject);
 
 }
 
+
+function editProject(){
+    $("#editing").remove();
+    var proj = $(this).attr("id");
+    
+    var selectstr = "<select id='folio_select'>";
+    for (var i in folios){
+	selectstr += "<option value='"+folios[i]+"'>"+folios[i]+"</option>";
+    }
+    
+    selectstr += "</select>"
+    
+    $("#proj_"+proj+"").append("<div id='editing'><textarea id='edit_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='edit_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='edit_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><br>"+selectstr+"<button type='button' id='save_proj' name='Save'>Save</button></div>");
+    
+    console.log(projects[proj]);
+
+}
 
 
 // startup
