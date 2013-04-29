@@ -216,9 +216,9 @@ function viewProjects(){
     $("#about_me").remove();
     var projstr = "";
     for (var proj in projects){
-	projstr+= ("<li>" + proj + "</li>");
+	projstr+= ("<div id='"+proj+"'>" + proj + "</div><br>");
     }
-    $("#contents").empty().append("<ul>"+projstr+"</ul>");
+    $("#contents").empty().append(""+projstr+"");
 
 }
 
