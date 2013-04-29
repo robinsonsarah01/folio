@@ -39,7 +39,7 @@ def addUser(username,password,name):
     user = { "username" : username
              , "password" : password #temporary
              , "folios" : ["about"] #keep track of folio names
-             , "about" : name #temporary
+             , "about" : { "description" : name } #temporary
              , "projects" : { } }
     coll.insert(user)
     return True
@@ -122,6 +122,7 @@ def editPage(username,pagename,info,aspect=""):
 
     else:
         p = user[pagename]
+        print p
         p[aspect] = info
         coll.update({"username":username},
                     { "$set": {pagename:p} } )
@@ -244,7 +245,8 @@ if __name__ == "__main__":
     #print delPage("test","Software Dev")
     #print editPage("test","about","test name - i am cool","description")
     #print delProject("test","p1")
-    #print addProject("test","p1",{"description":"this is my first project"})
+    #print addProject("test","p1",{"description":"this is my first project"
+                                  ,"link":"some.com","embed":""})
     #print addProjToFolio("test","page","p1")
     #print delProjFromFolio("test","page","p1")
     #print editProject("test","p1","this is my first project, yo","description")

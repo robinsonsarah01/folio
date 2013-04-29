@@ -231,18 +231,41 @@ function editProject(){
     $("#editing").remove();
     var proj = $(this).attr("id");
     
-    var selectstr = "<select id='folio_select'>";
+    var selectstr = "<select id='folio_select'><option value=''></option>";
     for (var i in folios){
 	selectstr += "<option value='"+folios[i]+"'>"+folios[i]+"</option>";
     }
     
     selectstr += "</select>"
     
-    $("#proj_"+proj+"").append("<div id='editing'><textarea id='edit_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='edit_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='edit_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><br>"+selectstr+"<button type='button' id='save_proj' name='Save'>Save</button></div>");
+    $("#proj_"+proj+"").append("<div id='editing'><textarea id='edit_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='edit_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='edit_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><br>"+selectstr+"<button type='button' id='save_proj' name='Save'>Save</button><button type='button' id='del_proj' name='Delete'>Delete</button></div>");
     
-    console.log(projects[proj]);
+    //sometimes the dictionary won't have certain keys
+    try { $("#edit_description").text(projects[proj]["description"]); }
+    catch (err) { }
+    try { $("#edit_link").text(projects[proj]["link"]); }
+    catch (err) { }
+    try { $("#edit_embed").text(projects[proj]["embed"]); }
+    catch (err) { }
+    
+    $("#save_proj").click(saveProject,{projectname:proj});
+    $("#del_proj").click(delProject,{projectname:proj});
 
 }
+
+function saveProject(event){
+    //if folio_select value is '', don't add a project to a folio!!
+    //need to add delprojfromfolio functionality to folio pages
+    
+    
+    
+}
+
+function delProject(event){
+
+}
+
+
 
 
 // startup
