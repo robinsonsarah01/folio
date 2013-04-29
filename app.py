@@ -218,7 +218,13 @@ def addProject():
         username = session['user']
 
     projectname = request.args.get("projectname","")
-    projectinfo = request.args.get("projectinfo","") #dict w/ description, etc
+    des = request.args.get("projectinfo[description]","")
+    link = request.args.get("projectinfo[link]","")
+    embed = request.args.get("projectinfo[embed]","")
+
+    projectinfo = { "description":des, "link":link, "embed":embed }
+    
+    print projectinfo
 
     res = False
     if projectname:

@@ -152,15 +152,17 @@ function addFolio() { //actually goes to server
 	      });
 }
 
+
+
 //create project
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here(If Available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
 
 
 
-    $("#create").click(addFolio);
+    $("#create").click(addProject);
 }
 
 function addProject() { //actually goes to server
@@ -168,21 +170,24 @@ function addProject() { //actually goes to server
 
     name = $("#add_title").val();
     des = $("#add_description").val();
+    link = $("#add_link").val();
+    embed = $("#add_embed").val(); 
+    
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
-	$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
-	$("#add_error").fadeOut(2500,function(){
+	$("#contents").append("<p id='add_proj_error'>Alphanumeric characters only, and no spaces, please.</p>");
+	$("#add_proj_error").fadeOut(2500,function(){
 	    
 	    $("#add_title").val("");
 	    $("#create").removeAttr("disabled");
-	    $("#add_error").remove();
+	    $("#add_proj_error").remove();
 	});
 	return false; //break function
     }
 
-    //info = { "description" : description, "projects" : [] };
+    info = { "description" : des, "link" : link, "embed" : embed };
 
-    $.getJSON("/addPage",{"username":username,"pagename":name,"description":des},
+    $.getJSON("/addProject",{"username":username,"projectname":name,"projectinfo":info},
 	      function(data){
 		  if (data == true){
 		      window.location.reload(true);

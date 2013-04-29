@@ -364,3 +364,10 @@ margin:0px;
     left:3em;
 
 }
+
+#add_proj_error {
+    positon: relative;
+    /*top: 5em;
+    /left: 10em;*/
+    color: #BF3030;
+}
