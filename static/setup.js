@@ -154,7 +154,7 @@ function addFolio() { //actually goes to server
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here(If Available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here(If Available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
 
     $("#create").click(addFolio);
 }
