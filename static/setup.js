@@ -27,7 +27,7 @@ function loadFolioData(data,page){
     
     else{
 	//temporary - projects need to be a list
-	$("#contents").append("<h2>This is my "+page+" folio</h2><a id='folio_link' href=/"+username+"/"+page+">View this folio</a><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></div><h2>These projects are attached to this folio:</h2><div id='projects'>"+data['projects']+"</div><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button><div id='delete_note'>Be careful, this cannot be undone!</div>");
+	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>These projects are in this folio</h2></center><div id='projects'>"+data['projects']+"</div><br><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
 	$("#folio_description").text(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
 	$("#folio_delete").click({pagename:page},delFolio);
@@ -114,6 +114,8 @@ function createFolio() {
     $("#about_me").remove()
     $("#contents").empty().append("<div id='add'><h1>Add a new Folio!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
 
+
+
     $("#create").click(addFolio);
 }
 
@@ -155,6 +157,8 @@ function addFolio() { //actually goes to server
 function createProject() {
     $("#about_me").remove()
     $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here(If Available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
+
+
 
     $("#create").click(addFolio);
 }
@@ -215,5 +219,8 @@ $(document).ready( function() {
     viewFolio("about"); //load page thru js
     //change color of about tab
     $("#about").css("background-color","#CDF2D6").css("color","#8E978D");
+
+    $('#folio_save').css('position','relative');
+    $('#folio_save').css('left','6em');
 
 });
