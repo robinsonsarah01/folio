@@ -246,7 +246,7 @@ if __name__ == "__main__":
     #print editPage("test","about","test name - i am cool","description")
     #print delProject("test","p1")
     #print addProject("test","p1",{"description":"this is my first project"
-                                  ,"link":"some.com","embed":""})
+#                                  ,"link":"some.com","embed":""})
     #print addProjToFolio("test","page","p1")
     #print delProjFromFolio("test","page","p1")
     #print editProject("test","p1","this is my first project, yo","description")
