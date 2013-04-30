@@ -213,7 +213,8 @@ def addProjToFolio(username,folio,project):
 def delProjFromFolio(username,folio,project):
     #used in delProject and separately
     
-    if folio != "about": #double checking
+    if folio == "about": #double checking
+        print "about is a special folio - db: delprojfromfolio"
         return True
 
     user = coll.find_one({"username":username})

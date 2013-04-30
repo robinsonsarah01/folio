@@ -298,6 +298,7 @@ def delProjFromFolio():
 
     res = False
     if folio and project:
+        print "deleting proj from folio"
         res = db.delProjFromFolio(username,folio,project)
 
     return json.dumps(res)

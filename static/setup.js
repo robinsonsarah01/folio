@@ -32,13 +32,38 @@ function loadFolioData(data,page){
     }
     
     else{
+	var projstr = ""
+	projstr = data['projects'].reduce( 
+	    function(p,c,i,a) { return p+"<div id='proj_"+c+"'>"+c+"<button class='remove_proj' id='"+c+"' type='button' name='Remove project from folio'>Remove project from folio</button></div>";},"" ); //if you want to display projs do it circa here
+	projstr = projstr.substring(0,(projstr.length-3));
 	//temporary - projects need to be a list
-	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>"+page+" Projects and Experience</h2></center><div id='projects'>"+data['projects']+"</div><br><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
+	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>"+page+" Projects and Experience</h2></center><div id='projects'>"+projstr+"</div><br><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
 	$("#folio_description").text(data['description']);
 	//console.log(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
 	$("#folio_delete").click({pagename:page},delFolio);
+	$(".remove_proj").click({pagename:page},removeProjFromFolio);
     }
+}
+
+
+function removeProjFromFolio(event){
+    var proj = $(this).attr("id");
+    var folio = event.data.pagename;
+    $(".remove_proj").attr("disabled","disabled");
+
+    //console.log(proj+" "+folio);
+    
+    $.getJSON("/delProjFromFolio",{"username":username,"folio":folio,"project":proj},function(data){
+	if (data == true){
+	    window.location.reload(true); //shh i am somewhat lazy
+	}
+	else {
+	    console.log(data);
+	    $("#contents").append("<p id='proj_del_error'>Something went wrong. Please try again.</p>");
+	    $(".remove_proj").removeAttr("disabled");
+	}
+    });
 }
 
 
