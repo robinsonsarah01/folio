@@ -196,7 +196,7 @@ function addFolio() { //actually goes to server
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<center><div id='add'><h1>Add a New Project or Experience</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div></center><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<center><div id='add'><h1>Add a New Project or Experience</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div></center><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><textarea id='add_img' type='text' resize='false' placeholder='Add an image link here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
 
 
 
@@ -210,7 +210,7 @@ function addProject() { //actually goes to server
     var des = $("#add_description").val();
     var link = $("#add_link").val();
     var embed = $("#add_embed").val(); 
-    
+    var img = $("#add_img").val(); 
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
 	$("#contents").append("<p id='add_proj_error'>Alphanumeric characters only, and no spaces, please.</p>");
@@ -223,7 +223,7 @@ function addProject() { //actually goes to server
 	return false; //break function
     }
 
-    info = { "description" : des, "link" : link, "embed" : embed };
+    info = { "description" : des, "link" : link, "embed" : embed, "image" : img};
 
     $.getJSON("/addProject",{"username":username,"projectname":name,"projectinfo":info},
 	      function(data){
