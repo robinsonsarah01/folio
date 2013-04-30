@@ -196,7 +196,7 @@ function addFolio() { //actually goes to server
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><div id='upload-area'><div id='preview'><img width='100px' height='100px' src='' id='thumb'></div><form action='/ajax_upload' id='newHotnessForm'><label>Upload a Picture</label><input type='file' size='20' id='imageUpload' class=' '><button class='button' type='submit'>Save</button></form></div><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
 
 
 
@@ -372,6 +372,23 @@ $(document).ready( function() {
     $("#newProj").click(createProject);
     $("#viewProj").click(viewProjects);
     //$("#blurb_save").click(saveBlurb);
+    //imgupload stuffs
+    var thumb = $('#thumb');	
+
+	new AjaxUpload('imageUpload', {
+		action: $('#newHotnessForm').attr('action'),
+		name: 'image',
+		onSubmit: function(file, extension) {
+			$('#preview').addClass('loading');
+		},
+		onComplete: function(file, response) {
+			thumb.load(function(){
+				$('#preview').removeClass('loading');
+				thumb.unbind();
+			});
+			thumb.attr('src', response);
+		}
+	});
 
     //css is all/mostly peter, thanks peter
     $('.left_rectangle').click(function(){
