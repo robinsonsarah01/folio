@@ -28,7 +28,7 @@ function loadFolioData(data,page){
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <img src="/static/shan.png"><div id="name">'+name+'</div></center><br><br> <form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img src="/static/shan.png"></center<br><br><br><br>><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
 	$("#blurb").text(data['description']); //no projects for about
 	$("#blurb_save").click(saveBlurb);
     }
@@ -36,10 +36,10 @@ function loadFolioData(data,page){
     else{
 	var projstr = ""
 	projstr = data['projects'].reduce( 
-	    function(p,c,i,a) { return p+"<div id='proj_"+c+"'>"+c+"<button class='remove_proj' id='"+c+"' type='button' name='Remove project from folio'>Remove project from folio</button></div>";},"" ); //if you want to display projs do it circa here
+	    function(p,c,i,a) { return p+"<div id='proj_"+c+"'>"+c+"<button class='remove_proj' id='"+c+"' type='button' name='Remove project from folio'>   Remove project from folio</button></div>";},"" ); //if you want to display projs do it circa here
 	projstr = projstr.substring(0,(projstr.length-3));
 	//temporary - projects need to be a list
-	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>"+page+" Projects and Experience</h2></center><div id='projects'>"+projstr+"</div><br><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
+	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this Folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>"+page+" Projects and Experience</h2></center><br><div id='projects'>"+projstr+"</div><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
 	$("#folio_description").text(data['description']);
 	//console.log(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
@@ -146,7 +146,7 @@ function saveBlurb(){
 
 function createFolio() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Folio!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<center><div id='add'><h1>Add a New Folio</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></center></div><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea></center><center><button type='button' id='create' name='Create'>Create</button></div></center>");
 
 
 
@@ -196,7 +196,7 @@ function addFolio() { //actually goes to server
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<div id='add'><h1>Add a new Project!</h1><br><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div><br><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
+    $("#contents").empty().append("<center><div id='add'><h1>Add a New Project or Experience</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div></center><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><button type='button' id='create' name='Create'>Create</button></div>");
 
 
 
