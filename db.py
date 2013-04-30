@@ -163,7 +163,8 @@ def delProject(username,projectname):
                 { "$set": {"projects":p}})
 
     for folio in user["folios"]:
-        delProjFromFolio(username,folio,projectname)
+        if folio!= "about":
+            delProjFromFolio(username,folio,projectname)
     
     return True
     
@@ -199,7 +200,8 @@ def addProjToFolio(username,folio,project):
         return errors[2]
 
     f = user[folio]
-    f["projects"].append(project)
+    if project not in f['projects']: #no duplicates
+        f["projects"].append(project)
     
     coll.update({"username":username},
                 { "$set": {folio:f}})
@@ -210,10 +212,14 @@ def addProjToFolio(username,folio,project):
 @user_exists
 def delProjFromFolio(username,folio,project):
     #used in delProject and separately
+    
+    if folio != "about": #double checking
+        return True
 
     user = coll.find_one({"username":username})
 
     f = user[folio]
+    print f
     if project in f["projects"]: #f[p] is a list of str project names
         f["projects"].remove(project)
 

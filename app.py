@@ -257,6 +257,7 @@ def editProject():
     projectname = request.args.get("projectname","")
     aspect = request.args.get("aspect","")
     projectinfo = request.args.get("projectinfo","")
+
     if not aspect:
         des = request.args.get("projectinfo[description]","")
         link = request.args.get("projectinfo[link]","")

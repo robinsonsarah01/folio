@@ -35,6 +35,7 @@ function loadFolioData(data,page){
 	//temporary - projects need to be a list
 	$("#contents").append("<center><h2>"+page+"</h2><a id='folio_link' href=/"+username+"/"+page+"> View this folio </a></center><br><center><br><h2>Description</h2><br><div id='edit'><textarea type='text' id='folio_description' resize='false'></textarea></center><br><center><button type='button' id='folio_save' name='Save' value='"+page+"'>Save</button></center></div><h2><center>"+page+" Projects and Experience</h2></center><div id='projects'>"+data['projects']+"</div><br><center><h2>Options</h2></center><center><br><button id='folio_delete' name='Delete' value='"+page+"'>Delete this Folio</button></center><br><br><center><div id='delete_note'>Be careful, this cannot be undone!</div></center>");
 	$("#folio_description").text(data['description']);
+	//console.log(data['description']);
 	$("#folio_save").click({pagename:page},saveFolio);
 	$("#folio_delete").click({pagename:page},delFolio);
     }
@@ -42,8 +43,8 @@ function loadFolioData(data,page){
 
 
 function saveFolio(event){
-    page = event.data.pagename;
-    des = $($("#folio_description")).val();
+    var page = event.data.pagename;
+    var des = $($("#folio_description")).val();
     $("#folio_save").attr("disabled","disabled");
 
     $.getJSON("/editPage",{"username":username,"pagename":page,
@@ -59,7 +60,7 @@ function saveFolio(event){
 }
 
 function delFolio(event){
-    page = event.data.pagename;
+    var page = event.data.pagename;
     $("#folio_delete").attr("disabled","disabled");
 
     $.getJSON("/delPage",{"username":username,"pagename":page}
@@ -97,7 +98,7 @@ function viewFolio(page){
 function saveBlurb(){
     //do some stuff thru ajax and save the about me sighs at
 
-    info = $($("#blurb")).val(); //val of textarea
+    var info = $($("#blurb")).val(); //val of textarea
     $("#blurb_save").attr("disabled","disabled");
 
     $.getJSON("/editPage",{"username":username,"pagename":"about",
@@ -128,8 +129,8 @@ function createFolio() {
 function addFolio() { //actually goes to server
     $("#create").attr("disabled","disabled");
 
-    name = $("#add_title").val();
-    des = $("#add_description").val();
+    var name = $("#add_title").val();
+    var des = $("#add_description").val();
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
 	$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
@@ -178,10 +179,10 @@ function createProject() {
 function addProject() { //actually goes to server
     $("#create").attr("disabled","disabled");
 
-    name = $("#add_title").val();
-    des = $("#add_description").val();
-    link = $("#add_link").val();
-    embed = $("#add_embed").val(); 
+    var name = $("#add_title").val();
+    var des = $("#add_description").val();
+    var link = $("#add_link").val();
+    var embed = $("#add_embed").val(); 
     
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
@@ -233,7 +234,9 @@ function editProject(){
     
     var selectstr = "<select id='folio_select'><option value=''></option>";
     for (var i in folios){
-	selectstr += "<option value='"+folios[i]+"'>"+folios[i]+"</option>";
+	if (folios[i] != "about"){
+	    selectstr += "<option value='"+folios[i]+"'>"+folios[i]+"</option>";
+	}
     }
     
     selectstr += "</select>"
@@ -248,21 +251,88 @@ function editProject(){
     try { $("#edit_embed").text(projects[proj]["embed"]); }
     catch (err) { }
     
-    $("#save_proj").click(saveProject,{projectname:proj});
-    $("#del_proj").click(delProject,{projectname:proj});
+    $("#save_proj").click({projectname:proj},saveProject);
+    $("#del_proj").click({projectname:proj},delProject);
 
 }
 
 function saveProject(event){
-    //if folio_select value is '', don't add a project to a folio!!
     //need to add delprojfromfolio functionality to folio pages
     
+    $("#save_proj").attr("disabled","disabled");
+    $("#del_proj").attr("disabled","disabled");
     
+    var des = $("#edit_description").val();
+    var link = $("#edit_link").val();
+    var embed = $("#edit_embed").val();
+
+    var projectinfo = { "description":des, "link":link, "embed":embed };
+
+    var projname = event.data.projectname;
     
+    var folio_add = $("#folio_select").val();
+    //console.log(folio_add);
+
+    $.getJSON("/editProject",{"username":username,"projectname":projname,"projectinfo":projectinfo},function(data){
+	if (data == true){
+
+	    if (folio_add != ''){    //if folio_select value is '', don't add a project to a folio!!
+		$.getJSON("/addProjToFolio",{"username":username,"folio":folio_add,"project":projname},function(data){
+		    if (data == true){
+			$("#editing").append("<p class='saved' id='proj_saved'><b>Saved!</b></p>");
+			
+			$("#proj_saved").fadeOut(2500,function(){
+			    $("#save_proj").removeAttr("disabled");
+			    $("#del_proj").removeAttr("disabled");
+			    $("#proj_saved").remove();
+			});
+		    }
+		    else {
+			console.log(data);
+			$("#editing").append("<p id='proj_error'>Something went wrong. Please try again.</p>");
+			$("#save_proj").removeAttr("disabled");
+			$("#del_proj").removeAttr("disabled");
+		    }
+		});
+	    }
+	    
+	    else {
+		$("#editing").append("<p class='saved' id='proj_saved'><b>Saved!</b></p>");
+		
+		$("#proj_saved").fadeOut(2500,function(){
+		    $("#save_proj").removeAttr("disabled");
+		    $("#del_proj").removeAttr("disabled");
+		    $("#proj_saved").remove();
+		});
+	    }
+	}
+	else {
+	    console.log(data);
+	    $("#editing").append("<p id='proj_error'>Something went wrong. Please try again.</p>");
+	    $("#save_proj").removeAttr("disabled");
+	    $("#del_proj").removeAttr("disabled");
+	}
+    });
+    
+
 }
 
 function delProject(event){
+    var proj = event.data.projectname;
+    $("#save_proj").attr("disabled","disabled");
+    $("#del_proj").attr("disabled","disabled");
 
+    $.getJSON("/delProject",{"username":username,"projectname":proj}
+	      ,function(data){
+		  if (data == true){
+		      window.location.reload(true);
+		  }
+		  else {
+		      console.log(data);
+		      $("#editing").append("<p id='del_error'>Something went wrong. Please try again.</p>");
+		      
+		  }
+	      });
 }
 
 

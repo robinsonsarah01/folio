@@ -179,8 +179,8 @@ font-size:2em;
 
 
 #add h1{
-    position:relative;
-    left:1em;
+    /*position:relative;
+    left:1em;*/
     color:#8E978D;
 }
 
@@ -301,8 +301,6 @@ margin:0px;
 }
 
 #folio_save {
-    
-    
 
     border-radius: 6px;
     border: 2px solid #97C4AD; 
