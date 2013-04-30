@@ -262,7 +262,9 @@ def editProject():
         des = request.args.get("projectinfo[description]","")
         link = request.args.get("projectinfo[link]","")
         embed = request.args.get("projectinfo[embed]","")
-        projectinfo = { "description":des, "link":link, "embed":embed }
+        img = request.args.get("projectinfo[image]","")
+        projectinfo = { "description":des, "link":link
+                        , "embed":embed , "image" : img }
 
     res = False
     if projectname and projectinfo:
