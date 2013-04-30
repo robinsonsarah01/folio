@@ -21,7 +21,8 @@ Current Features
 *   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png) (courtesy of Peter)
 *   Complete database functions  
 *   Login functions are functional
-*   View folio
+*   View, edit, delete folios
+*   View, edit, delete projects
 
 
 Features To Be Implemented
@@ -29,8 +30,6 @@ Features To Be Implemented
 
 ###Frontend  (Peter & Elizabeth) 
 *   Ready-made templates
-*   Edit folio  
-*   Add project  
 *   Upload resume  
 *   Allow users to tag projects/bits of information according to the resume they want them to appear in, as well as weight them so they appear in the desired order (i.e. #net: 1, #sysadmin: 7)  
 *   Allow users to link to content from other sites   
