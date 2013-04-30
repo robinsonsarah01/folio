@@ -37,12 +37,23 @@ def addUser(username,password,name):
     if username in [ x["username"] for x in coll.find() ]:
         return errors[0]
     user = { "username" : username
+             , "name" : name
              , "password" : password #temporary
              , "folios" : ["about"] #keep track of folio names
              , "about" : { "description" : name } #temporary
              , "projects" : { } }
     coll.insert(user)
     return True
+
+
+@user_exists
+def getName(username):
+    user = coll.find_one({"username":username})
+    if "name" in user.keys():
+        return user["name"]
+
+    else:
+        return "Shan the Man"
 
 
 @user_exists
@@ -60,6 +71,8 @@ def getUserInfo(username):
              , "folios" : user["folios"]
              , "projects" : user["projects"] }
 
+    info['name'] = getName(username)
+    
     for p in user["folios"]:
         info[p] = user[p]
     

@@ -1,6 +1,7 @@
 var username
 var folios
 var projects
+var name
 
 function getInfo() {
     var url = document.URL;
@@ -10,6 +11,7 @@ function getInfo() {
     $.getJSON("/getUserInfo",{"username":username},function(data){
 	folios = data['folios'];
 	projects = data['projects'];
+	name = data['name'];
     });
 }
 
@@ -26,7 +28,7 @@ function loadFolioData(data,page){
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <img src="/static/shan.png"></center><br><br> <form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#about_me").append('<center> <img src="/static/shan.png"><div id="name">'+name+'</div></center><br><br> <form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
 	$("#blurb").text(data['description']); //no projects for about
 	$("#blurb_save").click(saveBlurb);
     }
