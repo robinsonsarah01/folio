@@ -17,6 +17,10 @@ Resources & Dependencies:
 *   Youtube for video integration
 *   Ravelry for yarn/pattern integration
 
+How to Use
+----------
+![How To] (https://www.dropbox.com/s/vs9cpia1gegevrq/HowTo.jpg)
+
 Current Features
 ----------------
 *   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png) (courtesy of Peter)
