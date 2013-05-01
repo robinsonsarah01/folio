@@ -1,9 +1,16 @@
 from flask import Flask,request,render_template,redirect, session, url_for
+from werkzeug import secure_filename
 import db
 import json 
+import os
 
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
+#max filesize 10mb
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+app.config['UPLOAD_FOLDER'] = 'uploads'
+global ALLOWED_EXTENSIONS 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 @app.route("/", methods = ['GET','POST'])
 def login():
@@ -98,6 +105,11 @@ def folio(username="",page=""):
         return redirect(url_for("home",username))
     
     else:
+        if request.method == "POST":
+            uploaded_files = request.files.getlist("file[]")
+            for fiel in uploaded_files:
+                if fiel and allowed_file(fiel.filename):
+                    fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         folio = db.getPage(username,page)
         projects = db.getProjects(username)
        
@@ -107,6 +119,8 @@ def folio(username="",page=""):
         return render_template("user.html",username=username
                                ,page=page,folio=folio,projects=projects)
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
 #might not use this - edit happens in /username (home page) thru js
@@ -310,5 +324,4 @@ def delProjFromFolio():
 
 if __name__ == "__main__":
     db.connect()
-    app.run(debug=True)
-
+    app.run(debug=True, port=9985)
