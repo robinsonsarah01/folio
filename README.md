@@ -1,6 +1,7 @@
 Folio
 =========
 PROJECT HOSTED [HERE](http://ml7.stuycs.org:8888)
+Currently having deployment issues -> run app.py and then login using user:kingofirony password:kingofirony. I recommend looking at the music folio. 
 ###Group Members
 
 Sarah Robinson, Elizabeth Ji, Peter Jasko, Daryl Sew
