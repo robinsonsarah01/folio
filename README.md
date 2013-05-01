@@ -19,7 +19,7 @@ Resources & Dependencies:
 
 How to Use
 ----------
-![How To] (https://www.dropbox.com/s/vs9cpia1gegevrq/HowTo.jpg)
+![How To](https://www.dropbox.com/s/vs9cpia1gegevrq/HowTo.jpg)
 
 Current Features
 ----------------
