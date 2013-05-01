@@ -79,8 +79,20 @@ def home(username=""):
         return redirect(url_for("login"))
     if "user" in session and not username:
         username = session["user"]
-        
-    if request.method == "GET":
+    if request.method == "POST":
+        uploaded_files = request.files.getlist("file[]")
+        for fiel in uploaded_files:
+            if fiel and allowed_file(fiel.filename):
+                filename = secure_filename(fiel.filename)
+                fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        info = db.getUserInfo(username)
+        try: 
+            pages = info['folios']
+            projects = info['projects']
+        except:
+            return redirect(url_for("login", anerror=info))
+        return render_template("setup.html", username=username, pages=pages, projects=projects) 
+    elif request.method == "GET":
         print "USERNAME: ", username
         info = db.getUserInfo(username)
         print "GOT INFO FROM DB IN HOME: ", info
@@ -105,11 +117,6 @@ def folio(username="",page=""):
         return redirect(url_for("home",username))
     
     else:
-        if request.method == "POST":
-            uploaded_files = request.files.getlist("file[]")
-            for fiel in uploaded_files:
-                if fiel and allowed_file(fiel.filename):
-                    fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         folio = db.getPage(username,page)
         projects = db.getProjects(username)
        
@@ -324,4 +331,4 @@ def delProjFromFolio():
 
 if __name__ == "__main__":
     db.connect()
-    app.run(debug=True, port=9985)
+    app.run(debug=True, port=9984)
