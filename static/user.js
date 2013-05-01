@@ -1,6 +1,7 @@
 var username
 var currpage
-//var nextpage
+var projects
+var name
 
 
 function getInfo(){
@@ -8,7 +9,13 @@ function getInfo(){
     var info = url.split("/");
     username = info[3];
     currpage = info[4];
-    return [ username, currpage ];
+    //return [ username, currpage ];
+
+    $.getJSON("/getUserInfo",{"username":username},function(data){
+	//folios = data['folios'];
+	projects = data['projects'];
+	name = data['name'];
+    });
 }
 
 function getPage(page){
@@ -22,8 +29,28 @@ function loadFolioData(data){
     //can do things to pagedata to make it pretty before this step
     //like mess with it in js and use different methods to display it etc
 
-    $("#folio_contents").empty().append("<p id='descrption'>"+data['description']+"</p>");
-    $("#folio_contents").append("<p id='projects'>"+data['projects']+"</p>");
+    $("#folio_contents").empty().append("<div id='name'>"+name+"</div><div id='descrption'>"+data['description']+"</div>");
+
+    var projstr = "";
+    for (var key in data['projects']){
+	proj = projects[data['projects'][key]]; //proj is project data
+	console.log(key);
+	projstr += "<div id='proj_"+data['projects'][key]+"'>";
+
+	if (proj['description']) {
+	    projstr += "<br>"+proj['description'];
+	}
+	if (proj['link']) {
+	    projstr += "<br>"+proj['link'];
+	}
+	if (proj['embed'])  {
+	    projstr+= "<br>"+proj['embed'];
+	}
+	
+	projstr+="</div>";
+    }
+
+    $("#folio_contents").append("<p id='projects'>"+projstr+"</p>");
 }
 
 
