@@ -249,7 +249,7 @@ function viewProjects(){
 	projstr+= ("<br><div id='proj_"+proj+"'>" + proj + "<button class='editProj' type='button' id='"+proj+"' name='Edit Project'>Edit Project</button></div>");
     }
     
-    $("#projects").append(""+projstr+"");
+    $("#projects").append("<center><h1 id='your_projects'>Your Projects and Experience</h1></center>"+projstr+"");
     $(".editProj").click(editProject);
 
 }
