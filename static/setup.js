@@ -246,7 +246,7 @@ function viewProjects(){
     
     var projstr = "";
     for (var proj in projects){
-	projstr+= ("<br><div id='proj_"+proj+"'>" + proj + "<button class='editProj' type='button' id='"+proj+"' name='Edit Project'>Edit Project</button></div>");
+	projstr+= ("<br><div class='pro_experience' id='proj_"+proj+"'><h1>" + proj + "</h1><button class='editProj' type='button' id='"+proj+"' name='Edit Project'>Edit Project</button></div>");
     }
     
     $("#projects").append("<center><h1 id='your_projects'>Your Projects and Experience</h1></center>"+projstr+"");
@@ -268,7 +268,7 @@ function editProject(){
     
     selectstr += "</select>"
     
-    $("#proj_"+proj+"").append("<div id='editing'><textarea id='edit_description' type='text' resize='false' placeholder='Write about your project here'></textarea><br><textarea id='edit_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea><br><textarea id='edit_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea><br>"+selectstr+"<button type='button' id='save_proj' name='Save'>Save</button><button type='button' id='del_proj' name='Delete'>Delete</button></div>");
+	$("#proj_"+proj+"").append("<div id='editing'><br><center>Description<br><textarea id='edit_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><center>Link<br><textarea id='edit_link' type='text' resize='false' placeholder='Put a link to the project here (if available)'></textarea></center><br><center>Embedded Content<br><textarea id='edit_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea></center><br><center>"+selectstr+"</center><br><br><center><button type='button' id='save_proj' name='Save'>Save</button></center><center><button type='button' id='del_proj' name='Delete'>Delete</button></center></div>");
     
     //sometimes the dictionary won't have certain keys
     try { $("#edit_description").text(projects[proj]["description"]); }
