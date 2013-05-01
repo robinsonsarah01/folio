@@ -29,25 +29,31 @@ function loadFolioData(data){
     //can do things to pagedata to make it pretty before this step
     //like mess with it in js and use different methods to display it etc
 
-    $("#folio_contents").empty().append("<div id='name'>"+name+"</div><div id='descrption'>"+data['description']+"</div>");
+    $("#folio_contents").empty().append("<div id='name'><center><h1>"+name+"</h1></center></div>"+"</div><div id='descrption'>&nbsp;&nbsp;&nbsp;"+data['description']+"</div>");
 
+    if($('#folio_description').length == 0) {
+    $("#left_scroll").append("<div id=folio_description> &nbsp;" +data['description']+ "</div>");
+	}
     var projstr = "";
     for (var key in data['projects']){
 	proj = projects[data['projects'][key]]; //proj is project data
 	console.log(key);
-	projstr += "<div id='proj_"+data['projects'][key]+"'>";
+	projstr += "<div class='new_project' id='proj_"+data['projects'][key]+"'>";
 
 	if (proj['description']) {
-	    projstr += "<br>"+proj['description'];
+	    projstr += "<div id='description'><b>Project Description:</b>"+proj['description']+"</div>";
 	}
 	if (proj['link']) {
-	    projstr += "<br>"+proj['link'];
+	    projstr += "<br>This project can be viewed over <a href=http://"+proj['link']+">here.</a><br>";
+	}
+if (proj['key']) {
+	    projstr += "<br>"+proj['key'];
 	}
 	if (proj['embed'])  {
-	    projstr+= "<br>"+proj['embed'];
+	    projstr+= "<br><center>"+proj['embed']+ "</center>";
 	}
 	
-	projstr+="</div>";
+	projstr+="</div><br><br><hr width='75%' size='5' color='#8E978D'> ";
     }
 
     $("#folio_contents").append("<p id='projects'>"+projstr+"</p>");

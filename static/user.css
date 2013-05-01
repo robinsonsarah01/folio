@@ -64,3 +64,18 @@ html{
     background-repeat: repeat;
 }
 
+#name h1{
+display:block;
+color:white;
+   background-color: #8E978D;
+position:relative;
+top:-.8em;
+}
+
+.new_project{
+display:block;
+
+margin:10px;
+padding-top:10px;
+padding-bottom:10px;
+}
