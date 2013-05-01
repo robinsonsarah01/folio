@@ -3,7 +3,8 @@ from werkzeug import secure_filename
 import db
 import json 
 import os
-
+import re
+import hashlib
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
 #max filesize 10mb
@@ -79,23 +80,14 @@ def home(username=""):
         return redirect(url_for("login"))
     if "user" in session and not username:
         username = session["user"]
-    if request.method == "POST":
-        uploaded_files = request.files.getlist("file[]")
-        for fiel in uploaded_files:
-            if fiel and allowed_file(fiel.filename):
-                filename = secure_filename(fiel.filename)
-                fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #userhash = str(hashlib.sha224(username).hexdigest())
+    #userhash = str(re.sub(r'[^\x00-\x7F]', '_', userhash))
+    os.system("mkdir uploads/"+username)
+    os.system("cp static/shan.png "+"uploads/"+username)
+    if request.method == "GET":
+        #print "USERNAME: ", username
         info = db.getUserInfo(username)
-        try: 
-            pages = info['folios']
-            projects = info['projects']
-        except:
-            return redirect(url_for("login", anerror=info))
-        return render_template("setup.html", username=username, pages=pages, projects=projects) 
-    elif request.method == "GET":
-        print "USERNAME: ", username
-        info = db.getUserInfo(username)
-        print "GOT INFO FROM DB IN HOME: ", info
+        #print "GOT INFO FROM DB IN HOME: ", info
         try:
             pages = info["folios"]
             projects = info["projects"]
@@ -105,6 +97,23 @@ def home(username=""):
         
         return render_template("setup.html",username=username,pages=pages
                                ,projects=projects)
+    elif request.method == "POST":
+        uploaded_files = request.files.getlist("file[]")
+        os.system("mkdir uploads/" + username)
+        for fiel in uploaded_files:
+            if fiel and allowed_file(fiel.filename):
+                filename = secure_filename(fiel.filename)
+                filename = "shan.png"
+                fiel.save(os.path.join((app.config['UPLOAD_FOLDER']+"/"+str(username)+"/"), filename))
+
+        info = db.getUserInfo(username)
+        try: 
+            pages = info['folios']
+            projects = info['projects']
+        except:
+            return redirect(url_for("login", anerror=info))
+        return render_template("setup.html", username=username, pages=pages, projects=projects) 
+
 
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
@@ -331,4 +340,4 @@ def delProjFromFolio():
 
 if __name__ == "__main__":
     db.connect()
-    app.run(debug=True, port=9984)
+    app.run(debug=True, port=9978)
