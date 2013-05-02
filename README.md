@@ -12,7 +12,7 @@ Folio is a streamlined portfolio builder created to help job seekers present the
 
 How to Use
 ----------
-![How To](https://photos-6.dropbox.com/t/0/AABXK_SkQPLEb9RcUzEAuCMAUpvnsd2LKW1NGapu0_5RIQ/12/168237082/jpeg/32x32/3/_/1/2/HowTo.jpg/VFFBIV0ZJCxLDLOBOqcUkutOiON28AFCK97E71wd-pg?size=1280x960)
+![How To](http://i.imgur.com/j5jEqRw.jpg)
 
 To share your folio, use this format: ml7.stuycs.org:8888/YOURUSERNAME/YOURFOLIO - remember, this is case sensitive!
 
@@ -26,7 +26,7 @@ Resources & Dependencies:
 
 MAPs
 ----
-![Mockups/MAPs/Templates] (https://www.dropbox.com/sh/qgoin6mokyv82gd/KHuJhuJLhN)
+![Mockups/MAPs/Templates] (http://imgur.com/a/Tj71m)
 
 Current Features
 ----------------
