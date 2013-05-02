@@ -310,5 +310,5 @@ def delProjFromFolio():
 
 if __name__ == "__main__":
     db.connect()
-    app.run(debug=True)
+    app.run(debug=True, port=8888)
 
