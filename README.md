@@ -26,7 +26,7 @@ Resources & Dependencies:
 
 MAPs
 ----
-![Mockups/MAPs/Templates] (http://imgur.com/a/Tj71m)
+![Mockups/MAPs/Templates](http://imgur.com/a/Tj71m)
 
 Current Features
 ----------------
