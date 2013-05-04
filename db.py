@@ -160,6 +160,8 @@ def addProject(username,projectname,projectinfo):
     if projectname in p.keys():
         return errors[3]
     
+    projectinfo['title'] = projectname
+
     p[projectname] = projectinfo
     coll.update({"username":username},
                 { "$set": {"projects":p}})
@@ -192,6 +194,7 @@ def editProject(username,projectname,projectinfo,aspect=""):
     projects = user["projects"]
 
     if not aspect:
+        projectinfo['title'] = projectname #name cannot be edited atm
         projects[projectname] = projectinfo
     else:
         projects[projectname][aspect] = projectinfo
@@ -259,14 +262,14 @@ def dropUsers(): #testing purposes
 if __name__ == "__main__":
     connect()
     #dropUsers()
-    #addUser("test","test","test name")
+    addUser("test","test","test name")
     #print checkPass("test","test")
-    #print addPage("test","page",{"description":"this is my page folio","projects":[]})
-    #print delPage("test","Software Dev")
+    #print addPage("test","page","this is my page folio")
+    #print delPage("test","page")
     #print editPage("test","about","test name - i am cool","description")
     #print delProject("test","p1")
     #print addProject("test","p1",{"description":"this is my first project"
-#                                  ,"link":"some.com","embed":""})
+     #                             ,"link":"some.com","embed":"","image":""})
     #print addProjToFolio("test","page","p1")
     #print delProjFromFolio("test","page","p1")
     #print editProject("test","p1","this is my first project, yo","description")
