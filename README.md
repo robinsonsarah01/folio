@@ -1,6 +1,6 @@
 Folio
 =========
-PROJECT HOSTED AT http://ml7.stuycs.org:8888
+PROJECT HOSTED AT http://ml7.stuycs.org:8889
 Currently having deployment issues -> run app.py and then login using user:kingofirony password:kingofirony. I recommend looking at the music folio. 
 ###Group Members
 
@@ -14,7 +14,7 @@ How to Use
 ----------
 ![How To](http://i.imgur.com/j5jEqRw.jpg)
 
-To share your folio, use this format: ml7.stuycs.org:8888/YOURUSERNAME/YOURFOLIO - remember, this is case sensitive!
+To share your folio, use this format: ml7.stuycs.org:8889/YOURUSERNAME/YOURFOLIO - remember, this is case sensitive!
 
 Resources & Dependencies:
 ------------------------
