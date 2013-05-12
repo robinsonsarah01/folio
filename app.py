@@ -4,7 +4,10 @@ import json
 
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
-
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 #max filesize 10mb
+app.config['UPLOAD_FOLDER'] = 'uploads'
+global ALLOWED_EXTENSIONS
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 @app.route("/", methods = ['GET','POST'])
 def login():
     if request.method=='GET':
@@ -83,9 +86,23 @@ def home(username=""):
         except: #fails if info is a string error
             print "USER DOES NOT EXIST ERROR"
             return redirect(url_for("login",anerror=info))
-        
         return render_template("setup.html",username=username,pages=pages
                                ,projects=projects)
+    elif request.method == "POST":
+        uploaded_files = request.files.getlist('file[]')
+        print "THE USERNAME IS" + username
+        os.system("mkdir uploads/" + username)
+        for fiel in uploaded_files:
+            if fiel and allowed_file(fiel.filename):
+                filename = secure_filename(fiel.filename)
+                fiel.save(os.path.join(app.config['UPLOAD_FOLDER']+"/"+username+"/"), filename)
+        info = db.getUserInfo(username)
+        try: 
+            pages = info['folios']
+            projects = info['projects']
+        except:
+            return redirect(url_for("login", anerror=info))
+        return render_template("setup.html", username=username, pages=pages, projects=projects) 
 
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
@@ -107,7 +124,8 @@ def folio(username="",page=""):
         return render_template("user.html",username=username
                                ,page=page,folio=folio,projects=projects)
 
-
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 #might not use this - edit happens in /username (home page) thru js
 
