@@ -79,6 +79,8 @@ def home(username=""):
         username = session["user"]
         
     if request.method == "GET":
+        os.system("mkdir uploads/"+username)
+        os.system("cp static/shan.png uploads/"+username)
         #print "USERNAME: ", username
         info = db.getUserInfo(username)
         #print "GOT INFO FROM DB IN HOME: ", info
@@ -94,11 +96,15 @@ def home(username=""):
         username = str(request.form['uzernaem'])
         uploaded_files = request.files.getlist('file[]')
         os.system("mkdir uploads/" + username)
+        os.system("cp static/shan.png uploads/"+username+"/")
         for fiel in uploaded_files:
             if fiel and allowed_file(fiel.filename):
                 filename = secure_filename(fiel.filename)
                 fiel.save(os.path.join(app.config['UPLOAD_FOLDER']+'/'+username+'/', filename))        
-        """
+                q = "mv uploads/"+username+"/"+filename+" uploads/"+username+"/shan.png"
+                print "command that isn't working: " + q
+                os.system(q)
+                """
         info = db.getUserInfo(username)
         try: 
             pages = info['folios']
