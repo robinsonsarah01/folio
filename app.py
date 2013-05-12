@@ -1,10 +1,12 @@
 from flask import Flask,request,render_template,redirect, session, url_for
+from werkzeug import secure_filename
 import db
 import json 
+import os
 
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 #max filesize 10mb
+app.config['MAX_CONTENT_LENGTH'] = 24 * 1024 * 1024 #max filesize 10mb
 app.config['UPLOAD_FOLDER'] = 'uploads'
 global ALLOWED_EXTENSIONS
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -35,7 +37,7 @@ def login():
             #if all goes well
             session["user"] = username
             info = db.getUserInfo(username)
-            print "RESULT IN LOGIN: ", info
+            #print "RESULT IN LOGIN: ", info
             try:
                 pages = info["folios"]
             except: #fails if info is a string error
@@ -77,31 +79,45 @@ def home(username=""):
         username = session["user"]
         
     if request.method == "GET":
-        print "USERNAME: ", username
+        #print "USERNAME: ", username
         info = db.getUserInfo(username)
-        print "GOT INFO FROM DB IN HOME: ", info
+        #print "GOT INFO FROM DB IN HOME: ", info
         try:
             pages = info["folios"]
             projects = info["projects"]
         except: #fails if info is a string error
-            print "USER DOES NOT EXIST ERROR"
+            #print "USER DOES NOT EXIST ERROR"
             return redirect(url_for("login",anerror=info))
         return render_template("setup.html",username=username,pages=pages
                                ,projects=projects)
     elif request.method == "POST":
+        username = str(request.form['uzernaem'])
         uploaded_files = request.files.getlist('file[]')
-        print "THE USERNAME IS" + username
-        os.system("mkdir uploads/" + username)
+        print "line 94 the username is " + username
+        #os.system("mkdir uploads/" + username)
+        print "made it to line 96"
         for fiel in uploaded_files:
+            print "made it to line 98"
+            print "FILENAME IS" + fiel.filename
             if fiel and allowed_file(fiel.filename):
+                print "made it to line 100"
                 filename = secure_filename(fiel.filename)
-                fiel.save(os.path.join(app.config['UPLOAD_FOLDER']+"/"+username+"/"), filename)
+                print "made it to line 102"
+                fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))        
+        print "made it to line 104"
         info = db.getUserInfo(username)
+        print "made it to line 106"
         try: 
+            print "made it to line 106"
             pages = info['folios']
+            print "made it to line 110"
             projects = info['projects']
+            print "made it to line 112"
         except:
+            print "made it to line 114"
             return redirect(url_for("login", anerror=info))
+            print "made it to line 116"
+        print "made it to line 117"
         return render_template("setup.html", username=username, pages=pages, projects=projects) 
 
 
@@ -146,7 +162,9 @@ def edit(username="",page=""):
 #---ajax urls------------------
 
 #folio (page) ajax stuff
-
+@app.route("/upload", methods=["GET", "POST"])
+def uploadImage():
+    username
 @app.route("/getUserInfo",methods=["GET","POST"])
 def getUserInfo():
     username = request.args.get("username","")
