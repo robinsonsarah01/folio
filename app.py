@@ -93,33 +93,21 @@ def home(username=""):
     elif request.method == "POST":
         username = str(request.form['uzernaem'])
         uploaded_files = request.files.getlist('file[]')
-        print "line 94 the username is " + username
-        #os.system("mkdir uploads/" + username)
-        print "made it to line 96"
+        os.system("mkdir uploads/" + username)
         for fiel in uploaded_files:
-            print "made it to line 98"
-            print "FILENAME IS" + fiel.filename
             if fiel and allowed_file(fiel.filename):
-                print "made it to line 100"
                 filename = secure_filename(fiel.filename)
-                print "made it to line 102"
-                fiel.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))        
-        print "made it to line 104"
+                fiel.save(os.path.join(app.config['UPLOAD_FOLDER']+'/'+username+'/', filename))        
+        """
         info = db.getUserInfo(username)
-        print "made it to line 106"
         try: 
-            print "made it to line 106"
             pages = info['folios']
-            print "made it to line 110"
             projects = info['projects']
-            print "made it to line 112"
         except:
-            print "made it to line 114"
             return redirect(url_for("login", anerror=info))
-            print "made it to line 116"
-        print "made it to line 117"
         return render_template("setup.html", username=username, pages=pages, projects=projects) 
-
+        """
+        return redirect("/"+username+"/")
 
 @app.route("/<username>/<page>",methods = ["GET","POST"])
 def folio(username="",page=""):
