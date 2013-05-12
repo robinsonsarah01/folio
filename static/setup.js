@@ -6,7 +6,7 @@ var name
 function getInfo() {
     var url = document.URL;
     var info = url.split("/");
-    username = info[3]
+    username = info[3];
 
     $.getJSON("/getUserInfo",{"username":username},function(data){
 	folios = data['folios'];
@@ -25,10 +25,15 @@ function loadFolioData(data,page){
     //console.log("in loadFolioData");
     $("#about_me").remove();
     $("#contents").empty(); //.append("<p id='data'>"+data+"</p>");
+    var url = document.URL;
+    var info = url.split("/");
+    username = info[3];
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img src="/static/shan.png"></center<br><br><br><br>><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img id="user_image" src="../static/uploads/'+username+'/new.png?"'+ (new Date()).getTime() +'></center<br><br><br><br>> <form method="POST" enctype="multipart/form-data" action="/<username>/"><input type="file" name="file[]" multiple=""><input type="hidden" name="uzernaem" value="'+username+'"><input type="submit" value="add"></form><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form> escape(new Date())');
+	d = new Date();
+	$("#user_image").attr("src", "../static/uploads/"+ username + "/new.png?"+ d.getTime());
 	$("#blurb").text(data['description']); //no projects for about
 	$("#blurb_save").click(saveBlurb);
     }
