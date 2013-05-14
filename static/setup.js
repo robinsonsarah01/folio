@@ -31,7 +31,7 @@ function loadFolioData(data,page){
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img id="user_image" src="../static/uploads/'+username+'/new.png?"'+ (new Date()).getTime() +'></center<br><br><br><br>> <form method="POST" enctype="multipart/form-data" action="/<username>/"><input type="file" name="file[]" multiple=""><input type="hidden" name="uzernaem" value="'+username+'"><input type="submit" value="add"></form><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form> escape(new Date())');
+	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img id="user_image" src="../static/uploads/'+username+'/new.png?"'+ (new Date()).getTime() +'></center<br><br><br><br><center> <form method="POST" enctype="multipart/form-data" action="/<username>/" id="upload"><input type="file" onchange="this.form.submit();" name="file[]" multiple=""></center><input type="hidden" name="uzernaem" value="'+username+'"><input type="submit" value="adds"></form><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
 	d = new Date();
 	$("#user_image").attr("src", "../static/uploads/"+ username + "/new.png?"+ d.getTime());
 	$("#blurb").text(data['description']); //no projects for about

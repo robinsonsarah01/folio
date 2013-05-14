@@ -20,6 +20,7 @@ html{
     z-index:2;
 }
 
+
 .left_rectangle{
     position: relative;
     background-color: #8E978D;
@@ -98,7 +99,7 @@ top:1em;
 }
 
 
-#about_me input{
+#about_me input:not(input[type*="file"]){
 position:relative; 
 border-radius: 6px;
   border: 2px solid #97C4AD; 
@@ -118,6 +119,16 @@ font-size:2em;
   background: white;
   margin: 0 0 5px 0;}
 
+input[type*="file"]{
+position:absolute;
+height:40%;
+left:40%;
+opacity:0;
+top:10%;
+width:60%;;
+-moz-border-radius: 6px;
+z-index:20;
+}
 #blurb {
     resize: none;
     position:absolute;
