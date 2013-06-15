@@ -218,6 +218,8 @@ function addProject() { //actually goes to server
     var img = $("#add_img").val(); 
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
+
+	//once dialog box works comment this out
 	$("#contents").append("<p id='add_proj_error'>Alphanumeric characters only, and no spaces, please.</p>");
 	$("#add_proj_error").fadeOut(2500,function(){
 	    
@@ -225,6 +227,11 @@ function addProject() { //actually goes to server
 	    $("#create").removeAttr("disabled");
 	    $("#add_proj_error").remove();
 	});
+
+	//create a window to fix the title - will use jqueryui
+	/*res = window.confirm("You have non-alphanumeric characters in your title. Would you like us to remove them?"); */
+	
+	//comment this out once dialog works
 	return false; //break function
     }
 
@@ -362,7 +369,8 @@ function delProject(event){
 		  else {
 		      console.log(data);
 		      $("#editing").append("<p id='del_error'>Something went wrong. Please try again.</p>");
-		      
+		      $("#save_proj").removeAttr("disabled");
+		      $("#del_proj").removeAttr("disabled"); 
 		  }
 	      });
 }
