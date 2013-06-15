@@ -10,6 +10,8 @@ app.config['MAX_CONTENT_LENGTH'] = 24 * 1024 * 1024 #max filesize 10mb
 app.config['UPLOAD_FOLDER'] = './static/uploads'
 global ALLOWED_EXTENSIONS
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
 @app.route("/", methods = ['GET','POST'])
 def login():
     if request.method=='GET':
@@ -73,10 +75,11 @@ def logout():
 
 @app.route("/<username>/",methods = ["GET","POST"])
 def home(username=""):
-    if not username and "user" not in session:
+    if not username: #and "user" not in session:
         return redirect(url_for("login"))
-    if "user" in session and not username:
-        username = session["user"]
+    if "user" in session and session['user'] != username:
+        print "why are you here", session['user']
+        return redirect(url_for("login")) #keep people from editing other people's stuff?
         
     if request.method == "GET":
         os.system("mkdir ./static/uploads/"+username)
@@ -126,20 +129,28 @@ def home(username=""):
 def folio(username="",page=""):
     if not username and "user" not in session:
         return redirect(url_for("login"))
+
     #if "user" in session and not username: #cannot access other pages when logged in
      #   username = session["user"]
     if not page:
-        return redirect(url_for("home",username))
+        if 'user' in session and session['user'] == username:
+            return redirect(url_for("home",username))
+        else: #'user' in session and session['user'] != username:
+            page = 'about' #page doesn't exist but the person accessing it is not the owner of the page
+
+
     
-    else:
-        folio = db.getPage(username,page)
-        projects = db.getProjects(username)
-       
-        if folio == "folio or project does not exist":
-            return redirect(url_for("home"))
-       
-        return render_template("user.html",username=username
+    folio = db.getPage(username,page)
+    projects = db.getProjects(username)
+    
+    if folio == "folio or project does not exist":
+        return redirect(url_for("home"))
+    
+    return render_template("user.html",username=username
                                ,page=page,folio=folio,projects=projects)
+
+
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -163,9 +174,13 @@ def edit(username="",page=""):
 #---ajax urls------------------
 
 #folio (page) ajax stuff
+
+
 @app.route("/upload", methods=["GET", "POST"])
 def uploadImage():
     username
+
+
 @app.route("/getUserInfo",methods=["GET","POST"])
 def getUserInfo():
     username = request.args.get("username","")
@@ -341,7 +356,6 @@ def delProjFromFolio():
         res = db.delProjFromFolio(username,folio,project)
 
     return json.dumps(res)
-
 
 
 
