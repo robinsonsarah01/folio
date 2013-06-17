@@ -2,6 +2,7 @@ var username
 var folios
 var projects
 var name
+//var title_fixed //for dialog purposes
 
 function getInfo() {
     var url = document.URL;
@@ -147,7 +148,51 @@ function saveBlurb(){
 
 
 
+
+
+
+//called by dialog to fix titles (in create folio and create proj)
+//i could have combined these into one function oops
+
+function replaceSpaces(){
+    //title_fixed = true;
+
+    var title = $("#add_title").val();
+    //var t1 = title;
+    //while ( /(\s+)/.test(title) ) {
+	t1 = title.replace(/(\s+)/g,"_"); //replace only runs once without the g
+    //}
+    //var new_title = t1;
+    //while ( /(\W+)/.test(t1) ){
+	new_title = t1.replace(/(\W+)/g,""); //remove non-alphanumeric characters 
+    //}
+
+    $("#add_title").val(new_title);
+    
+    $("#create_dialog").dialog("close");
+}
+
+function removeSpaces(){
+    
+    var title = $("#add_title").val();
+    //var t1 = title;
+   // while ( /(\s+)/.test(title) ) {
+    var t1 = title.replace(/(\s+)/g,""); 
+    //}
+    //var new_title = t1;
+    //while ( /(\W+)/.test(t1) ){
+    var new_title = t1.replace(/(\W+)/g,""); //remove non-alphanumeric characters 
+    //}
+
+    $("#add_title").val(new_title);
+
+    $("#create_dialog").dialog("close");
+}
+
+
+
 // CREATE FOLIO STUFF
+
 
 function createFolio() { //puts stuff into page
     $("#about_me").remove()
@@ -155,16 +200,16 @@ function createFolio() { //puts stuff into page
     
     //jquery ui dialog stuff
     $("#create_dialog").dialog( { autoOpen: false
-				  , buttons : [ { text: "Replace spaces with underscores (_)" , click: replaceSpaces }
+				  , buttons : [ { text: "Replace spaces with _" , click: replaceSpaces }
 						, { text: "Remove spaces" , click: removeSpaces }
 						, { text: "Fix manually" , click: function() { $(this).dialog("close"); 
 											       //$("#create").removeAttr("disabled"); 
-											       //var blah = false;
+											       //title_fixed = false;
 											     }
 						  }
 					      ]
 				  , closeOnEscape: false
-				  , hide: "fold" //might not work??
+				  , hide: "fold" //can be replaced with other effects
 				  , show: "fold"
 				  , modal: true
 				  , beforeClose: function(event,ui) { $("#create").removeAttr("disabled"); }
@@ -173,13 +218,15 @@ function createFolio() { //puts stuff into page
     $("#create").click(addFolio);
 }
 
+
+
 function addFolio() { //actually goes to server
     $("#create").attr("disabled","disabled");
 
     var name = $("#add_title").val();
     var des = $("#add_description").val();
 
-    if (! /^[a-zA-Z0-9]+$/.test(name) ){
+    if (! /^[a-zA-Z0-9_]+$/.test(name) ){ //aka \/W\
 	/*$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
 	$("#add_error").fadeOut(2500,function(){
 	    
@@ -191,8 +238,13 @@ function addFolio() { //actually goes to server
 
 	//do stuff with dialog: 
 
+	//title_fixed = false;
 	$("#create_dialog").dialog("open");
-	return false; //replace with a check of a global var to see whether to continue
+	//return false; //replace with a check of a global var to see whether to continue
+
+	//if (!title_fixed){
+	return false; //break out of function b/c title is still invalid or allow user to change title
+	//}
     }
 
     //info = { "description" : description, "projects" : [] };
@@ -396,15 +448,7 @@ function delProject(event){
 }
 
 
-//called by dialog to fix titles
 
-function replaceSpaces(){
-
-}
-
-function removeSpaces(){
-
-}
 
 
 
