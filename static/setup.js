@@ -149,11 +149,26 @@ function saveBlurb(){
 
 // CREATE FOLIO STUFF
 
-function createFolio() {
+function createFolio() { //puts stuff into page
     $("#about_me").remove()
-    $("#contents").empty().append("<center><div id='add'><h1>Add a New Folio</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></center></div><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea></center><center><button type='button' id='create' name='Create'>Create</button></div></center>");
-
-
+    $("#contents").empty().append("<center><div id='add'><h1>Add a New Folio</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></center></div><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your projects here'></textarea></center><center><button type='button' id='create' name='Create'>Create</button></div></center><div id='create_dialog' title='Invalid Title'>Your title has non-alphanumeric characters and/or spaces in it.</div>");
+    
+    //jquery ui dialog stuff
+    $("#create_dialog").dialog( { autoOpen: false
+				  , buttons : [ { text: "Replace spaces with underscores (_)" , click: replaceSpaces }
+						, { text: "Remove spaces" , click: removeSpaces }
+						, { text: "Fix manually" , click: function() { $(this).dialog("close"); 
+											       //$("#create").removeAttr("disabled"); 
+											       //var blah = false;
+											     }
+						  }
+					      ]
+				  , closeOnEscape: false
+				  , hide: "explode" //might not work??
+				  , show: "fold"
+				  , modal: true
+				  , beforeClose: function(event,ui) { $("#create").removeAttr("disabled"); }
+				});
 
     $("#create").click(addFolio);
 }
@@ -165,14 +180,19 @@ function addFolio() { //actually goes to server
     var des = $("#add_description").val();
 
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
-	$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
+	/*$("#contents").append("<p id='add_error'>Alphanumeric characters only, and no spaces, please.</p>");
 	$("#add_error").fadeOut(2500,function(){
 	    
 	    $("#add_title").val("");
 	    $("#create").removeAttr("disabled");
 	    $("#add_error").remove();
 	});
-	return false; //break function
+	return false; //break function */
+
+	//do stuff with dialog: 
+
+	$("#create_dialog").dialog("open");
+	return false; //replace with a check of a global var to see whether to continue
     }
 
     //info = { "description" : description, "projects" : [] };
@@ -373,6 +393,17 @@ function delProject(event){
 		      $("#del_proj").removeAttr("disabled"); 
 		  }
 	      });
+}
+
+
+//called by dialog to fix titles
+
+function replaceSpaces(){
+
+}
+
+function removeSpaces(){
+
 }
 
 
