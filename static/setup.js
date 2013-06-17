@@ -164,7 +164,7 @@ function createFolio() { //puts stuff into page
 						  }
 					      ]
 				  , closeOnEscape: false
-				  , hide: "explode" //might not work??
+				  , hide: "fold" //might not work??
 				  , show: "fold"
 				  , modal: true
 				  , beforeClose: function(event,ui) { $("#create").removeAttr("disabled"); }
