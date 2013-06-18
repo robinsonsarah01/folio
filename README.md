@@ -1,7 +1,7 @@
 Folio
 =========
 PROJECT HOSTED AT http://ml7.stuycs.org:8888
-Currently having deployment issues -> run app.py and then login using user:kingofirony password:kingofirony. I recommend looking at the music folio. 
+To run the project locally, git clone the repo. Run app.py and then login. We recommend looking at the music folio that belongs to the user kingofirony. 
 ###Group Members
 
 Sarah Robinson, Elizabeth Ji, Peter Jasko, Daryl Sew
@@ -33,8 +33,9 @@ Current Features
 *   ![Front page design](http://i1322.photobucket.com/albums/u568/Daryl_LikeaBoshkosh/ScreenShot2013-03-25at105308PM1_zpsb15aa15b.png) (courtesy of Peter)
 *   Complete database functions  
 *   Login functions are functional
-*   View, edit, delete folios
-*   View, edit, delete projects
+*   View, edit, create, and delete folios
+*   View, edit, create, and delete projects
+*   Title can be auto-fixed if it is invalid
 
 
 Features To Be Implemented
@@ -48,7 +49,7 @@ Features To Be Implemented
 *   Many more
 
 ###Backend  (Sarah & Daryl)
-*   Forgotten password server stuff (probably not feasible, leave it for later if there's time)
+*   Forgotten password server stuff
 
 Deadlines
 ---------
@@ -56,14 +57,15 @@ Deadlines
 *    4/1: MongoDB code for storing folios functional.  COMPLETE
 *    4/5: Login page should be functional for multiple users concurrently accessing folio. COMPLETE
 *    4/7: Users should be able to view and edit folio at a basic level. COMPLETE
-*    4/12: Editing folios allows for addition of projects and uploading of resumes. MOSTLY COMPLETE
+*    4/12: Editing folios allows for addition of projects. COMPLETE
 *    4/21: Integration with other sites worked out. UNFINISHED
-*    4/24: Visual designs added to site and folios.  UNFINISHED
-*    4/28: Project deployed; testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth will deal with debugging. UNFINISHED
+*    4/24: Visual designs added to site and folios.  COMPLETE (not customizable)
+*    4/28: Project deployed; testing. Peter and Daryl are out of the picture for the next 4 days so Sarah and Elizabeth will deal with debugging.
 *    4/30: Folio is polished; final issues are being worked out.  A few ready-made templates created (pushed back from 4/5 -- this has become more of an "if we have time" thing than an actuality).
 *    5/1: Project due date  
+*    6/20: Software Development demo night!
+
 
-(Please note that schedules may become impacted by pending college visits and other things. Thank you.)
 
 Individual Task Distribution
 ----------------------------
