@@ -1,7 +1,7 @@
 Folio
 =========
 PROJECT HOSTED AT http://ml7.stuycs.org:8888
-To run the project locally, git clone the repo. Run app.py and then login. We recommend looking at the music folio that belongs to the user kingofirony. 
+To run the project locally, git clone the repo. Run app.py and then login. We recommend looking at the music folio that belongs to the user kingofirony ( http://ml7.stuycs.org:8888/kingofirony/music ). 
 ###Group Members
 
 Sarah Robinson, Elizabeth Ji, Peter Jasko, Daryl Sew
