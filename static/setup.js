@@ -31,7 +31,7 @@ function loadFolioData(data,page){
 
     if (page == "about"){
 	$("#contents").prepend('<div id="about_me"></div>');
-	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img id="user_image" src="../static/uploads/'+username+'/new.png?"'+ (new Date()).getTime() +'></center<br><br><br><br><center> <form method="POST" enctype="multipart/form-data" action="/<username>/" id="upload"><input type="file" onchange="this.form.submit();" name="file[]" multiple=""></center><input type="hidden" name="uzernaem" value="'+username+'"><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" placeholder="Write about yourself here."></textarea></form>');
+	$("#about_me").append('<center> <div id="name"><h1>'+name+'</h1></div><img id="user_image" src="../static/uploads/'+username+'/new.png?"'+ (new Date()).getTime() +'></center><center> <form method="POST" enctype="multipart/form-data" action="/<username>/" id="upload"><input type="file" onchange="this.form.submit();" name="file[]" multiple=""></center><input type="hidden" name="uzernaem" value="'+username+'"><form id="blurb_form"><button type="button" id="blurb_save" name="Save">Save</button> <textarea type="text" id="blurb" resize="false" height="60%" placeholder="Write about yourself here."></textarea></form>');
 	d = new Date();
 	$("#user_image").attr("src", "../static/uploads/"+ username + "/new.png?"+ d.getTime());
 	$("#blurb").text(data['description']); //no projects for about
@@ -367,12 +367,23 @@ function delProject(event){
 	      });
 }
 
+function loadSettings(){
+	$("#config").click(function(){
+		$("#contents").empty();
+		$("#contents").append("<center><h2>Settings</h2>");
+		$("#contents").append("<center><img style='width:6em;' src='../static/github.png'></img><br><input type='text' id='git_username' placeholder='Github Username'><br><input type='password' id='git_password'  placeholder='Github Password'></input><br><button type='button'>Save</button></center><br><hr width='75%' size='5' color='#8E978D'> ");
+
+});}
+
 
 
 
 // startup
 
 $(document).ready( function() {
+	$('#about').empty();
+	$("#about").append("<center>About</center>");
+
     $("#add_folio").click(createFolio);
     $("#newProj").click(createProject);
     $("#viewProj").click(viewProjects);
@@ -393,6 +404,6 @@ $(document).ready( function() {
     viewFolio("about"); //load page thru js
     //change color of about tab
     $("#about").css("background-color","#CDF2D6").css("color","#8E978D");
-
+    loadSettings();
 
 });

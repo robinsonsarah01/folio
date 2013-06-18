@@ -87,9 +87,10 @@ h2 {
 position:relative;
 left:-1em;
 top:3em;
-height:40%;
+width: 40%;
 -moz-border-radius: 6px;
 border-radius: 6px;
+margin-bottom:4em;
 }
 
 #name{
@@ -131,7 +132,7 @@ z-index:20;
 }
 #blurb {
     resize: none;
-    position:absolute;
+    position:relative;
     bottom: 10%;
     left:2%;
     
@@ -148,7 +149,7 @@ z-index:20;
     0 0 2px #97C4AD; 
 
     width:95%;
-    height:40%;
+    height:8em;
     font-size:2em;
     background: white;
     margin: 0 0 5px 0;
