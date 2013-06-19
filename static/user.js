@@ -4,8 +4,7 @@ var projects;
 var name;
 
 //markdown stuff
-var Showdown; // = require("showdown");
-var mdconverter; //= new Showdown.converter();
+var mdconverter; 
 
 
 function getInfo(){
@@ -119,7 +118,7 @@ function renderMD(){
 					     //console.log(href.closest("div"));
 					     var converted = mdconverter.makeHtml(markdown.responseText);
 					     //console.log(converted);
-					     href.closest("div").append("<br><p>" + converted + "</p>");
+					     href.closest("div").append($("<br><p>" + converted + "</p>"));
 					 });
 	    }
     });
@@ -133,8 +132,8 @@ $(document).ready( function() {
     getInfo();
     viewFolio(currpage);
 
-    //Showdown = require("showdown");
-    mdconverter = new Showdown.converter();
+    
+    mdconverter = new Markdown.Converter();
     
 
     $('.left_rectangle').click(function(){
