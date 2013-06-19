@@ -86,7 +86,7 @@ def home(username=""):
         print os.path.exists("./static/uploads/"+username+"/new.png") 
         print "username is ",username
         if os.path.isfile("./static/uploads/"+username+"/new.png") != True:
-                            os.system("cp ./static/new.png ./static/uploads/"+username+"/")
+            os.system("cp ./static/new.png ./static/uploads/"+username+"/")
         #print "USERNAME: ", username
         info = db.getUserInfo(username)
         #print "GOT INFO FROM DB IN HOME: ", info
