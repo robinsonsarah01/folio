@@ -75,11 +75,10 @@ def logout():
 
 @app.route("/<username>/",methods = ["GET","POST"])
 def home(username=""):
-    if not username: #and "user" not in session:
+    if not username and "user" not in session:
         return redirect(url_for("login"))
-    if "user" in session and session['user'] != username:
-        print "why are you here", session['user']
-        return redirect(url_for("login")) #keep people from editing other people's stuff?
+    if "user" in session and not username:
+        username = session["user"]        
         
     if request.method == "GET":
         os.system("mkdir ./static/uploads/"+username)
@@ -98,11 +97,11 @@ def home(username=""):
             return redirect(url_for("login",anerror=info))
         return render_template("setup.html",username=username,pages=pages
                                ,projects=projects)
+
     elif request.method == "POST":
         username = str(request.form['uzernaem'])
         uploaded_files = request.files.getlist('file[]')
         os.system("mkdir ./static/uploads/" + username)
-        os.system("cp static/shan.png ./static/uploads/"+username+"/")
         os.system("rm ./static/new.png")
         for fiel in uploaded_files:
             if fiel and allowed_file(fiel.filename):

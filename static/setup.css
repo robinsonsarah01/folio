@@ -87,7 +87,7 @@ h2 {
 position:relative;
 left:-1em;
 top:3em;
-width:30%;
+width:50%;
 -moz-border-radius: 6px;
 border-radius: 6px;
 }
@@ -148,7 +148,7 @@ z-index:20;
     0 0 2px #97C4AD; 
 
     width:95%;
-    height:6em;
+    height:8em;
     font-size:2em;
     background: white;
     margin: 0 0 5px 0;
@@ -174,8 +174,8 @@ z-index:20;
     margin: 0 0 5px 0;
 
     position: absolute;
-    left: 2%;
-    bottom: 1%;
+    bottom:1%;
+
 
 }
 
