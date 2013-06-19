@@ -273,7 +273,24 @@ function addFolio() { //actually goes to server
 
 function createProject() {
     $("#about_me").remove()
-    $("#contents").empty().append("<center><div id='add'><h1>Add a New Project or Experience</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div></center><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><center><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here'></textarea></center><br><center><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea></center></center><center><textarea id='add_img' type='text' resize='false' placeholder='Add an image link here'></textarea></center><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><center><button type='button' id='create' name='Create'>Create</button></div></center>");
+    $("#contents").empty().append("<center><div id='add'><h1>Add a New Project or Experience</h1></center><br><center><textarea id='add_title' type='text' resize='false' placeholder='Title'></textarea></center><center><div id='title_note'><b>The title is case-sensitive, and no spaces, please!</b></div></center><br><center><textarea id='add_description' type='text' resize='false' placeholder='Write about your project here'></textarea></center><br><center><textarea id='add_link' type='text' resize='false' placeholder='Put a link to the project here'></textarea></center><br><center><textarea id='add_embed' type='text' resize='false' placeholder='Put any embedded content code here'></textarea></center></center><center><textarea id='add_img' type='text' resize='false' placeholder='Add an image link here'></textarea></center><!--textarea id='tags' type='text' resize='false' placeholder='Put any tags to go along with other folios.'></textarea--><center><button type='button' id='create' name='Create'>Create</button></div></center><div id='create_dialog' title='Invalid Title'>Your title has non-alphanumeric characters and/or spaces in it.</div>");
+
+    //jquery ui dialog stuff
+    $("#create_dialog").dialog( { autoOpen: false
+				  , buttons : [ { text: "Replace spaces with _" , click: replaceSpaces }
+						, { text: "Remove spaces" , click: removeSpaces }
+						, { text: "Fix manually" , click: function() { $(this).dialog("close"); 
+											       //$("#create").removeAttr("disabled"); 
+											       //title_fixed = false;
+											     }
+						  }
+					      ]
+				  , closeOnEscape: false
+				  , hide: "fold" //can be replaced with other effects
+				  , show: "fold"
+				  , modal: true
+				  , beforeClose: function(event,ui) { $("#create").removeAttr("disabled"); }
+				});
 
 
 
@@ -292,18 +309,18 @@ function addProject() { //actually goes to server
     if (! /^[a-zA-Z0-9]+$/.test(name) ){
 
 	//once dialog box works comment this out
-	$("#contents").append("<p id='add_proj_error'>Alphanumeric characters only, and no spaces, please.</p>");
+	/*$("#contents").append("<p id='add_proj_error'>Alphanumeric characters only, and no spaces, please.</p>");
 	$("#add_proj_error").fadeOut(2500,function(){
 	    
 	    $("#add_title").val("");
 	    $("#create").removeAttr("disabled");
 	    $("#add_proj_error").remove();
-	});
+	});*/
 
 	//create a window to fix the title - will use jqueryui
 	/*res = window.confirm("You have non-alphanumeric characters in your title. Would you like us to remove them?"); */
 	
-	//comment this out once dialog works
+	$("#create_dialog").dialog("open");
 	return false; //break function
     }
 
