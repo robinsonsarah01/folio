@@ -23,6 +23,32 @@ function getPage(page){
 	loadFolioData(data);
     });
 }
+
+function gitURL(url){
+    var items = [];
+    var hash = {};
+    var url;
+    var fin;
+
+    var x = $.getJSON("https://api.github.com/repos/"+ url +"/readme",function(data){
+	    $.each(data, function(key, val) {
+		    items.push('<li id="' + key + '">' + val + '</li>');
+		    hash[key] = val;  
+		});
+	    set();
+	});
+
+    function set(){
+	url  = hash['html_url'];
+	url = url.split('https://')
+url = url[1]
+	    url = 'raw.'+url;
+	url =  url.replace('/blob/','/');
+    }
+    
+    var fin = $.getJSON("https://" + url);
+    return fin;
+}
     
 
 function loadFolioData(data){
@@ -45,7 +71,16 @@ function loadFolioData(data){
 	}
 	if (proj['link']) {
 	    projstr += "<br>This project can be viewed over <a href=http://"+proj['link']+">here.</a><br>";
+	if(proj['link'].indexOf('github.com') >= 0){
+	    var url = proj['link'].split('https://github.com/');
+	    alert("https://github.com/"+url[1]+"/master/README.md");
+	    var markdown = $.getJSON("/getMD",{"url":"https://raw.github.com/"+url[1]+"/master/README.md"},function(){$("#description").append(markdown.responseText)});
+	   
 	}
+
+	}
+
+
 if (proj['key']) {
 	    projstr += "<br>"+proj['key'];
 	}

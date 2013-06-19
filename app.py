@@ -1,8 +1,10 @@
-from flask import Flask,request,render_template,redirect, session, url_for
+from flask import Flask,request,render_template,redirect, session, url_for,jsonify
 from werkzeug import secure_filename
 import db
 import json 
 import os
+import urllib2
+
 
 app = Flask(__name__)
 Flask.secret_key = "folio is short for portfolio" #obvs temporary
@@ -342,6 +344,13 @@ def delProjFromFolio():
 
     return json.dumps(res)
 
+#markdown getting ajax
+@app.route("/getMD",methods=["GET","POST"])
+def getMD():
+    md_url = request.args.get("url","")
+    md = urllib2.urlopen(md_url)
+    res = md.read()
+    return json.dumps(res)
 
 
 
