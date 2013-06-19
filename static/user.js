@@ -63,21 +63,14 @@ function loadFolioData(data){
     var projstr = "";
     for (var key in data['projects']){
 	proj = projects[data['projects'][key]]; //proj is project data
-	console.log(key);
+
 	projstr += "<div class='new_project' id='proj_"+data['projects'][key]+"'>";
 
 	if (proj['description']) {
 	    projstr += "<div id='description'><b>Project Description:</b>"+proj['description']+"</div>";
 	}
 	if (proj['link']) {
-	    projstr += "<br>This project can be viewed over <a href=http://"+proj['link']+">here.</a><br>";
-	if(proj['link'].indexOf('github.com') >= 0){
-	    var url = proj['link'].split('https://github.com/');
-	    alert("https://github.com/"+url[1]+"/master/README.md");
-	    var markdown = $.getJSON("/getMD",{"url":"https://raw.github.com/"+url[1]+"/master/README.md"},function(){$("#description").append(markdown.responseText)});
-	   
-	}
-
+	    projstr += "<br>This project can be viewed over <a href=http://"+proj['link']+" id="+proj['link']+">here.</a><br>";
 	}
 
 
@@ -100,17 +93,47 @@ function viewFolio(page){
     
 }
 
+function renderMD(){
+    var links = $('a');
+    $.map(links,function(n){
+	    console.log(" n is " + n); 
+	    link = "";
+	    link = "" + n;
+	    
+	    if(link.indexOf('github.com') >= 0){
+		var url = link.split('http://https//github.com/');
+		var markdown = $.getJSON("/getMD",{"url":"https://raw.github.com/"+url[1]+"/master/README.md"},function(){
+			try{
+				link = link.split("http://https");
+			}
+			catch(err){}
+			link[0]="http://https";
+			var fin_link = link[0] + ":" + link[1];
+			var href = $("a[href*=" +"\""+fin_link+ "\""+ "]");
+			console.log(href.closest("div"));
+			href.closest("div").append("<br><p>" + markdown.responseText+ "</p>");
+		    });
+	    }
+	});}
 
 $(document).ready( function() {
     //console.log(document.URL); //also window.location
     getInfo();
     viewFolio(currpage);
 
+
+    
+
     $('.left_rectangle').click(function(){
+	renderMD();
 	$('.left_rectangle').css("background-color","#8E978D");
 	$('#' + this.id).css("background-color","#CDF2D6");
 	$('.left_rectangle').css("color","white");
-	$('#' + this.id).css("color","#8E978D");
-    });
+	sti$('#' + this.id).css("color","#8E978D");
 
-});
+	});
+
+
+    
+
+    });
