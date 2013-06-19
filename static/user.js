@@ -1,7 +1,11 @@
-var username
-var currpage
-var projects
-var name
+var username;
+var currpage;
+var projects;
+var name;
+
+//markdown stuff
+var Showdown; // = require("showdown");
+var mdconverter; //= new Showdown.converter();
 
 
 function getInfo(){
@@ -40,9 +44,9 @@ function gitURL(url){
 
     function set(){
 	url  = hash['html_url'];
-	url = url.split('https://')
-url = url[1]
-	    url = 'raw.'+url;
+	url = url.split('https://');
+	url = url[1];
+	url = 'raw.'+url;
 	url =  url.replace('/blob/','/');
     }
     
@@ -74,7 +78,7 @@ function loadFolioData(data){
 	}
 
 
-if (proj['key']) {
+	if (proj['key']) {
 	    projstr += "<br>"+proj['key'];
 	}
 	if (proj['embed'])  {
@@ -83,7 +87,7 @@ if (proj['key']) {
 	
 	projstr+="</div><br><br><hr width='75%' size='5' color='#8E978D'> ";
     }
-
+    
     $("#folio_contents").append("<p id='projects'>"+projstr+"</p>");
 }
 
@@ -95,33 +99,42 @@ function viewFolio(page){
 
 function renderMD(){
     var links = $('a');
-    $.map(links,function(n){
+    $.map(links,function(n,i){
 	    console.log(" n is " + n); 
-	    link = "";
+	    var link = "";
 	    link = "" + n;
 	    
 	    if(link.indexOf('github.com') >= 0){
 		var url = link.split('http://https//github.com/');
-		var markdown = $.getJSON("/getMD",{"url":"https://raw.github.com/"+url[1]+"/master/README.md"},function(){
-			try{
-				link = link.split("http://https");
-			}
-			catch(err){}
-			link[0]="http://https";
-			var fin_link = link[0] + ":" + link[1];
-			var href = $("a[href*=" +"\""+fin_link+ "\""+ "]");
-			console.log(href.closest("div"));
-			href.closest("div").append("<br><p>" + markdown.responseText+ "</p>");
-		    });
+		var markdown = $.getJSON("/getMD",{"url":"https://raw.github.com/"+url[1]+"/master/README.md"},
+					 function(){
+					     try{
+						 link = link.split("http://https");
+					     }
+					     catch(err){}
+					     link[0]="http://https";
+					     //console.log(link);
+					     var fin_link = link[0] + ":" + link[1];
+					     var href = $("a[href*=" +"\""+fin_link+ "\""+ "]");
+					     //console.log(href.closest("div"));
+					     var converted = mdconverter.makeHtml(markdown.responseText);
+					     //console.log(converted);
+					     href.closest("div").append("<br><p>" + converted + "</p>");
+					 });
 	    }
-	});}
+    });
+}
+
+
+
 
 $(document).ready( function() {
     //console.log(document.URL); //also window.location
     getInfo();
     viewFolio(currpage);
 
-
+    //Showdown = require("showdown");
+    mdconverter = new Showdown.converter();
     
 
     $('.left_rectangle').click(function(){
@@ -129,7 +142,7 @@ $(document).ready( function() {
 	$('.left_rectangle').css("background-color","#8E978D");
 	$('#' + this.id).css("background-color","#CDF2D6");
 	$('.left_rectangle').css("color","white");
-	sti$('#' + this.id).css("color","#8E978D");
+	$('#' + this.id).css("color","#8E978D");
 
 	});
 
